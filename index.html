@@ -27,7 +27,7 @@
         <ul class="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
           <li><a href="#catalog" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">文獻資料庫</a></li>
           <li><a href="#framework" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">四大導讀模組</a></li>
-          <li><a href="#workflow" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">擴充規範</a></li>
+          <li><a href="#workflow" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">重點劃線指南</a></li>
         </ul>
       </nav>
     </div>
@@ -40,22 +40,22 @@
         <div class="lg:col-span-8 space-y-4">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold">
             <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
-            <span>由 AGENTS.md 規範與 paper-reading Skill 驅動</span>
+            <span>實證醫學文獻精讀 &times; 雙模態互動重點筆記</span>
           </div>
           <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
             結構化期刊文獻導讀與學術英語精讀庫
           </h1>
           <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-            這是一個以 <strong><code class="text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">AGENTS.md</code></strong> 為核心開發規則的可擴充式靜態學術網站。每篇收錄的論文皆依循統一標準，將艱澀原文轉化為<strong>「PICO 結構拆解、30 秒電梯簡報、實證文獻批判、英文精讀練習」</strong>四大互動模組，讓研究者與團隊能快速掌握實證證據並練習學術英語。
+            專為臨床研究者、醫療專業人員與學術讀者打造的互動式文獻知識庫。每篇收錄的國際期刊論文皆轉化為<strong>「PICO 結構拆解、30 秒電梯簡報、實證文獻批判、英文精讀練習」</strong>四大模組，並支援<strong>「AI 語意重點標記 + 讀者反白螢光筆筆記匯出」</strong>，快速掌握核心實證證據。
           </p>
           <div class="flex flex-wrap gap-3 pt-2">
             <a href="./papers/jmir-2026-cpg-ai.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold rounded-xl shadow-sm transition-colors">
-              <span>閱讀第一篇示範導讀</span>
+              <span>閱讀最新收錄文獻</span>
               <i data-lucide="arrow-right" class="w-4 h-4" aria-hidden="true"></i>
             </a>
-            <a href="#workflow" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-colors">
-              <i data-lucide="file-code-2" class="w-4 h-4" aria-hidden="true"></i>
-              <span>查看 AGENTS.md 擴充方式</span>
+            <a href="#catalog" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-colors">
+              <i data-lucide="library" class="w-4 h-4" aria-hidden="true"></i>
+              <span>瀏覽文獻資料庫</span>
             </a>
           </div>
         </div>
@@ -64,15 +64,15 @@
           <div class="p-4 rounded-2xl bg-slate-900 text-white col-span-2">
             <div class="text-xs text-blue-200 font-semibold">已收錄導讀文獻</div>
             <div class="text-3xl font-black mt-1 font-mono-metric"><span id="stat-total-papers">1</span> <span class="text-sm font-normal text-slate-300">篇</span></div>
-            <div class="text-[11px] text-slate-400 mt-1">資料來源：<code>data/papers.json</code></div>
+            <div class="text-[11px] text-slate-400 mt-1">持續收錄高影響力實證醫學與 AI 醫療研究</div>
           </div>
           <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100">
-            <div class="text-xs font-bold text-blue-800">標準模組</div>
-            <div class="text-xl font-black text-blue-900 mt-1 font-mono-metric">4 大區塊</div>
+            <div class="text-xs font-bold text-blue-800">結構化精讀</div>
+            <div class="text-xl font-black text-blue-900 mt-1 font-mono-metric">4 大模組</div>
           </div>
           <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
-            <div class="text-xs font-bold text-emerald-800">零建置部署</div>
-            <div class="text-xl font-black text-emerald-900 mt-1">GitHub Pages</div>
+            <div class="text-xs font-bold text-emerald-800">雙模態劃線</div>
+            <div class="text-xl font-black text-emerald-900 mt-1">MD 筆記匯出</div>
           </div>
         </div>
       </div>
@@ -81,8 +81,8 @@
     <!-- 四大核心模組規格總覽 -->
     <section id="framework" class="space-y-5">
       <div>
-        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">統一的四大導讀模組規格</h2>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1">本站每篇文獻頁皆依據 <code>AGENTS.md</code> 與 <code>.agents/skills/paper-reading/SKILL.md</code> 嚴格建置</p>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">統一的四大導讀模組架構</h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">每篇文獻皆依循標準實證評讀架構拆解，兼顧統計嚴謹度、口頭報告實用性與學術英文累積</p>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -136,38 +136,38 @@
       <div id="papers-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
     </section>
 
-    <!-- AGENTS.md 擴充工作流說明 -->
+    <!-- 雙模態重點劃線與互動閱讀指南 -->
     <section id="workflow" class="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-blue-300">Rule-Driven Scalability</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold mt-1">未來如何快速新增一篇文獻頁面？</h2>
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-300">Dual-Mode Paper Highlighting</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold mt-1">如何使用雙模態重點劃線與個人筆記？</h2>
         </div>
         <span class="px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold self-start sm:self-center">
-          3 步驟標準化 SOP
+          自動儲存於本機瀏覽器
         </span>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-          <div class="text-blue-300 font-bold">Step 1 &bull; 閱讀論文並讀取 AGENTS.md</div>
-          <p class="text-slate-300 leading-relaxed">提供期刊網址或 PDF 給 AI，AI 依據 <code>AGENTS.md</code> 與 <code>paper-reading</code> 萃取完整 PICO、統計數據、電梯簡報、批判與英文精讀。</p>
+          <div class="text-amber-300 font-bold">1 &bull; AI 四色語意重點標記</div>
+          <p class="text-slate-300 leading-relaxed">每篇導讀內頁預設標出「黃（核心數據）、藍（研究方法）、綠（實務結論）、紫（英文金句）」，並可由頂部工具列隨時一鍵切換顯示或隱藏。</p>
         </div>
         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-          <div class="text-blue-300 font-bold">Step 2 &bull; 套用模板建立獨立頁面</div>
-          <p class="text-slate-300 leading-relaxed">複製 <code>templates/paper-template.html</code>，依規範命名為 <code>papers/&lt;journal&gt;-&lt;year&gt;-&lt;keyword&gt;.html</code>，維持統一版型與無障礙元件。</p>
+          <div class="text-emerald-300 font-bold">2 &bull; 讀者反白互動式螢光筆</div>
+          <p class="text-slate-300 leading-relaxed">在內頁反白任意句子，即可透過浮動色盤或頂部工具列塗上黃、綠、紫三色螢光筆，所有自訂重點皆自動保存在瀏覽器中。</p>
         </div>
         <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
-          <div class="text-blue-300 font-bold">Step 3 &bull; 更新單一資料索引</div>
-          <p class="text-slate-300 leading-relaxed">將新論文的 Metadata 附加至 <code>data/papers.json</code>，首頁目錄卡片與標籤篩選器即會自動上架，不需手動改寫首頁排版。</p>
+          <div class="text-purple-300 font-bold">3 &bull; 個人重點筆記本與匯出</div>
+          <p class="text-slate-300 leading-relaxed">頁面底部的「個人重點劃線筆記本」會即時彙整你標記過的句子與所屬章節，支援一鍵複製成結構化 Markdown 讀書筆記。</p>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500 space-y-1">
-    <div>Paper Reading Hub &bull; 基於 <code>AGENTS.md</code> 與 <code>paper-reading</code> Skill 建置</div>
-    <div class="text-[11px] text-slate-400">可完全部署於 GitHub Pages 之純靜態網頁知識庫</div>
+    <div>Paper Reading Hub &bull; 實證期刊文獻互動導讀與學術英語精讀平台</div>
+    <div class="text-[11px] text-slate-400">Structured Evidence Appraisal, Elevator Pitch &amp; Academic English Digest</div>
   </footer>
 
   <!-- 本地 file:// 預覽用之備援資料（同步自 data/papers.json） -->
