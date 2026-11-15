@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{PAPER_TITLE_ZH}} | Paper Reading Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+  <a href="#main-content" class="skip-link visually-hidden">跳至主要內容</a>
+
+  <!-- 反白文字自動浮現之快速螢光筆色盤 -->
+  <div
+    id="selection-hl-popover"
+    hidden
+    class="bg-slate-900 text-white px-2.5 py-1.5 rounded-2xl shadow-xl border border-slate-700 flex items-center gap-1.5 text-xs"
+    role="group"
+    aria-label="反白文字快速劃線選單"
+  >
+    <span class="text-[11px] text-slate-300 font-semibold px-1">畫重點：</span>
+    <button type="button" data-apply-hl="yellow" aria-label="以黃色螢光筆標記重點" title="黃色：核心重點" class="px-2 py-1 rounded-lg bg-yellow-300 text-slate-950 font-bold hover:brightness-95">黃</button>
+    <button type="button" data-apply-hl="green" aria-label="以綠色螢光筆標記數據" title="綠色：關鍵數據" class="px-2 py-1 rounded-lg bg-emerald-300 text-slate-950 font-bold hover:brightness-95">綠</button>
+    <button type="button" data-apply-hl="purple" aria-label="以紫色螢光筆標記佳句" title="紫色：英文佳句" class="px-2 py-1 rounded-lg bg-purple-300 text-slate-950 font-bold hover:brightness-95">紫</button>
+  </div>
+
+  <!-- 行動裝置頂部導航列 -->
+  <header class="lg:hidden bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-40 flex items-center justify-between shadow-xs">
+    <div class="flex items-center space-x-2.5 min-w-0">
+      <a href="../index.html" class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white flex-shrink-0" aria-label="返回文獻總覽首頁">
+        <i data-lucide="arrow-left" class="w-4 h-4" aria-hidden="true"></i>
+      </a>
+      <div class="min-w-0">
+        <div class="font-bold text-slate-900 text-sm truncate">{{SHORT_TITLE_ZH}}</div>
+        <div class="text-[11px] text-slate-500 truncate">{{JOURNAL_SHORT}} ({{YEAR}}) &bull; Paper Reading 4 大模組</div>
+      </div>
+    </div>
+    <button
+      id="mobile-menu-btn"
+      type="button"
+      aria-label="開啟章節導覽選單"
+      aria-expanded="false"
+      aria-controls="sidebar"
+      class="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
+    >
+      <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
+    </button>
+  </header>
+
+  <div class="min-h-screen flex">
+    <!-- 左側固定側邊欄導航 -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-80 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 transform -translate-x-full lg:translate-x-0 lg:static lg:h-screen lg:sticky lg:top-0">
+      <div class="p-6 overflow-y-auto space-y-6">
+        <div class="space-y-4">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-blue-900">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            <span>返回文獻總覽 (Paper Hub)</span>
+          </a>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 flex-shrink-0">
+              <i data-lucide="book-open-check" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <div class="font-extrabold text-slate-900 text-sm tracking-tight">{{DOMAIN_LABEL}}</div>
+              <div class="text-xs text-slate-500 font-medium">Paper Reading 4 大模組</div>
+            </div>
+          </div>
+        </div>
+
+        <nav aria-label="本篇文獻章節導覽" class="space-y-1">
+          <a href="#overview" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all active-nav">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-blue-600" aria-hidden="true"></i>
+            <span>論文概覽與期刊指標</span>
+          </a>
+          <a href="#module-1-pico" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="crosshair" class="w-4 h-4 text-indigo-600" aria-hidden="true"></i>
+            <span>模組 1.1 主題與 PICO</span>
+          </a>
+          <a href="#module-1-method" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="git-branch" class="w-4 h-4 text-cyan-600" aria-hidden="true"></i>
+            <span>模組 1.2 研究方法細節</span>
+          </a>
+          <a href="#module-1-results" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-600" aria-hidden="true"></i>
+            <span>模組 1.3 研究發現與數據</span>
+          </a>
+          <a href="#module-1-significance" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="sparkles" class="w-4 h-4 text-sky-600" aria-hidden="true"></i>
+            <span>模組 1.4–1.5 重要性與結論</span>
+          </a>
+          <a href="#module-2-pitch" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="mic" class="w-4 h-4 text-amber-600" aria-hidden="true"></i>
+            <span>模組 2. 電梯簡報 (Pitch)</span>
+          </a>
+          <a href="#module-3-critiques" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="scale" class="w-4 h-4 text-rose-500" aria-hidden="true"></i>
+            <span>模組 3. 文獻批判 (Critiques)</span>
+          </a>
+          <a href="#module-4-english" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="languages" class="w-4 h-4 text-violet-600" aria-hidden="true"></i>
+            <span>模組 4. 英文精讀與詞彙庫</span>
+          </a>
+          <a href="#user-highlights-section" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <span class="flex items-center space-x-3">
+              <i data-lucide="highlighter" class="w-4 h-4 text-amber-500" aria-hidden="true"></i>
+              <span>重點劃線筆記本</span>
+            </span>
+            <span id="user-hl-count" class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-extrabold font-mono-metric">0</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- 期刊排行速覽卡片 -->
+      <div class="p-4 m-4 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl shadow-md">
+        <div class="flex items-center justify-between text-xs font-semibold mb-2">
+          <span>{{JOURNAL_SHORT}} ({{YEAR}})</span>
+          <span class="text-[10px] bg-emerald-400 text-slate-950 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">{{QUARTILE}}</span>
+        </div>
+        <div class="text-xs text-slate-300">
+          Impact Factor: <strong class="text-white font-bold">{{IMPACT_FACTOR}}</strong><br>
+          <span class="text-[11px] text-slate-400">{{JOURNAL_RANKING_NOTE}}</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主內容區 -->
+    <main id="main-content" data-ai-highlights="on" tabindex="-1" class="flex-1 min-w-0 max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-10 space-y-8">
+
+      <!-- 頂部固定 Paper 重點劃線工具列 (Accessible Toolbar) -->
+      <div class="sticky top-2 z-20 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-3 shadow-sm space-y-2">
+        <div
+          id="highlight-toolbar"
+          role="toolbar"
+          focusgroup="toolbar wrap"
+          aria-label="Paper 重點劃線與筆記工具列"
+          aria-controls="main-content"
+          class="flex flex-wrap items-center justify-between gap-2"
+        >
+          <div role="group" aria-label="AI 自動重點劃線顯示設定" class="flex flex-wrap items-center gap-2">
+            <button
+              id="btn-toggle-ai-hl"
+              type="button"
+              aria-pressed="true"
+              class="px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-300 transition-colors inline-flex items-center gap-1.5"
+            >
+              <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>AI 重點劃線</span>
+            </button>
+
+            <div class="hidden xl:flex items-center gap-1.5 text-[11px] text-slate-600 pl-1">
+              <span class="px-2 py-0.5 rounded bg-yellow-200/80 text-slate-900 font-semibold">黃：核心發現</span>
+              <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-950 font-semibold">藍：研究方法</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-950 font-semibold">綠：實務結論</span>
+              <span class="px-2 py-0.5 rounded bg-violet-100 text-violet-950 font-semibold">紫：英文金句</span>
+            </div>
+          </div>
+
+          <span role="separator" aria-orientation="vertical" class="hidden sm:inline-block"></span>
+
+          <div role="group" aria-label="讀者自訂反白螢光筆與筆記匯出" class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[11px] text-slate-500 font-semibold mr-1">反白畫線：</span>
+            <button type="button" data-apply-hl="yellow" aria-label="將選取文字標記為黃色重點" title="反白文字後點此標記為黃色" class="px-2.5 py-1 rounded-lg bg-yellow-200 hover:bg-yellow-300 text-slate-900 text-xs font-bold border border-yellow-400">黃色</button>
+            <button type="button" data-apply-hl="green" aria-label="將選取文字標記為綠色數據" title="反白文字後點此標記為綠色" class="px-2.5 py-1 rounded-lg bg-emerald-200 hover:bg-emerald-300 text-slate-900 text-xs font-bold border border-emerald-400">綠色</button>
+            <button type="button" data-apply-hl="purple" aria-label="將選取文字標記為紫色佳句" title="反白文字後點此標記為紫色" class="px-2.5 py-1 rounded-lg bg-purple-200 hover:bg-purple-300 text-slate-900 text-xs font-bold border border-purple-400">紫色</button>
+
+            <button id="btn-copy-all-hl" type="button" class="ml-1 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold border border-blue-200 inline-flex items-center gap-1">
+              <i data-lucide="clipboard-list" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>複製重點 Markdown</span>
+            </button>
+            <button id="btn-clear-user-hl" type="button" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-700 text-xs font-bold border border-slate-200">
+              清除自訂
+            </button>
+          </div>
+        </div>
+        <p id="hl-toolbar-status" role="status" class="text-[11px] font-semibold text-blue-700 min-h-[1rem] px-1"></p>
+      </div>
+
+      <!-- (0) 論文核心概覽與 Metadata -->
+      <section id="overview" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- 替換為 2-3 個關鍵標籤 -->
+          <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-200/80">{{TAG_1}}</span>
+          <span class="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-full border border-purple-200/80">{{TAG_2}}</span>
+        </div>
+
+        <div class="space-y-2">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight">
+            {{PAPER_TITLE_ZH}}
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium" lang="en">
+            {{PAPER_TITLE_EN}}
+          </p>
+        </div>
+
+        <!-- 概覽摘要段落：請在關鍵句使用 <mark class="ai-hl ai-hl-finding|ai-hl-method|ai-hl-takeaway"> 標註重點 -->
+        <p class="text-slate-700 leading-relaxed text-sm sm:text-base">
+          {{OVERVIEW_SUMMARY_WITH_AI_HIGHLIGHTS}}
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2 border-t border-slate-100">
+          <div class="lg:col-span-8 space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p><strong class="text-slate-900">作者群：</strong>{{AUTHORS}}</p>
+            <p><strong class="text-slate-900">研究單位：</strong>{{AFFILIATIONS}}</p>
+            <div class="flex flex-wrap gap-x-5 gap-y-2 pt-1 text-xs">
+              <span><strong>期刊：</strong><em>{{JOURNAL_CITATION}}</em></span>
+              <span><strong>DOI：</strong><a href="https://doi.org/{{DOI}}" target="_blank" rel="noopener noreferrer" class="text-blue-700 font-semibold hover:underline">{{DOI}}</a></span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
+            <!-- 3 張關鍵數據卡（須來自原文真實統計） -->
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+              <div class="text-[11px] text-slate-500 font-bold">{{METRIC_1_LABEL}}</div>
+              <div class="text-lg font-extrabold text-slate-900 font-mono-metric">{{METRIC_1_VALUE}}</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
+              <div class="text-[11px] text-emerald-700 font-bold">{{METRIC_2_LABEL}}</div>
+              <div class="text-lg font-extrabold text-emerald-800 font-mono-metric">{{METRIC_2_VALUE}}</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-blue-50/70 border border-blue-200/80">
+              <div class="text-[11px] text-blue-700 font-bold">{{METRIC_3_LABEL}}</div>
+              <div class="text-lg font-extrabold text-blue-800 font-mono-metric">{{METRIC_3_VALUE}}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組一：1.1 主題與 PICO -->
+      <section id="module-1-pico" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
+            <i data-lucide="crosshair" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 1.1｜主題與 PICO 架構</h2>
+            <p class="text-xs text-slate-500">以標準實證醫學 PICO 框架拆解本研究核心問題</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-amber-50/70 border-l-4 border-amber-500 text-xs sm:text-sm text-slate-700 leading-relaxed">
+          <strong class="text-amber-950">研究核心主題：</strong>{{TOPIC_SUMMARY}}
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-blue-700 uppercase tracking-wider">P &bull; Population / Problem（研究對象與問題）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{PICO_P}}</p>
+          </div>
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-indigo-700 uppercase tracking-wider">I &bull; Intervention / Exposure（介入或暴露）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{PICO_I}}</p>
+          </div>
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-cyan-700 uppercase tracking-wider">C &bull; Comparison / Control（對照組）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{PICO_C}}</p>
+          </div>
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-emerald-700 uppercase tracking-wider">O &bull; Outcomes（結局指標）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{PICO_O}}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組一：1.2 研究方法 -->
+      <section id="module-1-method" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-cyan-50 text-cyan-600 rounded-2xl">
+              <i data-lucide="git-branch" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">模組 1.2｜研究方法 (Methodology)</h2>
+              <p class="text-xs text-slate-500">點擊下方卡片檢視研究設計、樣本與統計方法細節</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <button type="button" data-method-key="design" class="text-left p-5 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all bg-white group">
+            <div class="font-bold text-slate-900 text-sm mb-1">1. 研究設計與場域</div>
+            <p class="text-xs text-slate-600 leading-relaxed">{{METHOD_DESIGN_SHORT}}</p>
+          </button>
+          <button type="button" data-method-key="stats" class="text-left p-5 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:shadow-md transition-all bg-white group">
+            <div class="font-bold text-slate-900 text-sm mb-1">2. 資料收集與統計分析</div>
+            <p class="text-xs text-slate-600 leading-relaxed">{{METHOD_STATS_SHORT}}</p>
+          </button>
+        </div>
+      </section>
+
+      <!-- 模組一：1.3 研究發現及主要結果 -->
+      <section id="module-1-results" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6 tabs-container">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-emerald-50 text-emerald-600 rounded-2xl">
+            <i data-lucide="bar-chart-3" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 1.3｜研究發現及主要統計結果</h2>
+            <p class="text-xs text-slate-500">含點估計、Effect Size / OR / HR、95% CI 與 p 值</p>
+          </div>
+        </div>
+
+        <div role="tablist" aria-label="研究統計結果切換" class="p-1.5 bg-slate-100 rounded-2xl">
+          <button type="button" role="tab" id="tab-primary" data-panel="panel-primary" aria-selected="true" tabindex="0" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            主要結局統計
+          </button>
+          <button type="button" role="tab" id="tab-secondary" data-panel="panel-secondary" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            次要結局 / 次群組
+          </button>
+        </div>
+
+        <div id="panel-primary" role="tabpanel" aria-labelledby="tab-primary" tabindex="0">
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            {{PRIMARY_OUTCOMES_HTML}}
+          </div>
+        </div>
+
+        <div id="panel-secondary" role="tabpanel" aria-labelledby="tab-secondary" hidden="until-found">
+          <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            {{SECONDARY_OUTCOMES_HTML}}
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組一：1.4 重要性與 1.5 結論 -->
+      <section id="module-1-significance" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-sky-50 text-sky-600 rounded-2xl">
+            <i data-lucide="sparkles" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 1.4–1.5｜研究重要性與結論建議</h2>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl bg-sky-50/70 border border-sky-200/80 space-y-2">
+            <h3 class="font-bold text-sky-950 text-sm">學術重要性</h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{SIGNIFICANCE_ACADEMIC}}</p>
+          </div>
+          <div class="p-5 rounded-2xl bg-teal-50/70 border border-teal-200/80 space-y-2">
+            <h3 class="font-bold text-teal-950 text-sm">臨床與實務價值</h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">{{SIGNIFICANCE_PRACTICAL}}</p>
+          </div>
+        </div>
+
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-700">
+          <h3 class="text-sm font-bold text-slate-900">結論與 3 項實務行動建議</h3>
+          <ul class="space-y-2">
+            <li class="p-4 rounded-2xl bg-slate-50 border border-slate-200">1. {{TAKEAWAY_1}}</li>
+            <li class="p-4 rounded-2xl bg-slate-50 border border-slate-200">2. {{TAKEAWAY_2}}</li>
+            <li class="p-4 rounded-2xl bg-slate-50 border border-slate-200">3. {{TAKEAWAY_3}}</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 模組二：電梯簡報 -->
+      <section id="module-2-pitch" class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-lg space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-amber-400/20 text-amber-300 rounded-2xl border border-amber-400/30">
+              <i data-lucide="mic" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">模組 2｜電梯簡報 (30–60 秒快速說明)</h2>
+              <p class="text-xs text-slate-300">Hook &rarr; Action &rarr; Punchline &rarr; Impact</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span id="pitch-copy-status" class="text-xs text-emerald-300 font-semibold" aria-live="polite"></span>
+            <button id="btn-copy-pitch" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold border border-white/15">
+              <i data-lucide="copy" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>複製簡報腳本</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="elevator-pitch-script" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm leading-relaxed">
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-amber-300 uppercase">1. Hook &bull; 痛點</div>
+            <p class="text-slate-200">{{PITCH_HOOK}}</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-sky-300 uppercase">2. Action &bull; 研究作為</div>
+            <p class="text-slate-200">{{PITCH_ACTION}}</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-emerald-300 uppercase">3. Punchline &bull; 核心發現</div>
+            <p class="text-slate-200">{{PITCH_PUNCHLINE}}</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-purple-300 uppercase">4. Impact &bull; 實務影響</div>
+            <p class="text-slate-200">{{PITCH_IMPACT}}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組三：文獻批判 -->
+      <section id="module-3-critiques" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-rose-50 text-rose-600 rounded-2xl">
+            <i data-lucide="scale" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 3｜文獻批判 (Critiques)</h2>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <details class="border border-emerald-200 rounded-2xl overflow-hidden bg-emerald-50/20" open>
+            <summary class="p-5 flex items-center justify-between bg-emerald-50/60">
+              <span class="font-bold text-slate-900 text-sm">研究優勢 (Strengths)</span>
+              <i data-lucide="chevron-down" class="chevron-icon w-5 h-5 text-emerald-700" aria-hidden="true"></i>
+            </summary>
+            <div class="p-5 border-t border-emerald-100 bg-white space-y-2 text-xs sm:text-sm text-slate-700">
+              {{STRENGTHS_HTML}}
+            </div>
+          </details>
+
+          <details class="border border-rose-200 rounded-2xl overflow-hidden bg-rose-50/20" open>
+            <summary class="p-5 flex items-center justify-between bg-rose-50/60">
+              <span class="font-bold text-slate-900 text-sm">研究限制與偏差風險 (Weaknesses &amp; Limitations)</span>
+              <i data-lucide="chevron-down" class="chevron-icon w-5 h-5 text-rose-700" aria-hidden="true"></i>
+            </summary>
+            <div class="p-5 border-t border-rose-100 bg-white space-y-2 text-xs sm:text-sm text-slate-700">
+              {{LIMITATIONS_HTML}}
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 模組四：英文文獻閱讀與句型精讀 -->
+      <section id="module-4-english" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-violet-50 text-violet-600 rounded-2xl">
+            <i data-lucide="languages" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 4｜英文文獻閱讀與句型精讀 (Academic English Digest)</h2>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">1. 論文核心英文摘要精讀</h3>
+          <!-- 請在核心英文金句使用 <mark class="ai-hl ai-hl-english"> 標註 -->
+          <article lang="en" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed space-y-3">
+            {{ENGLISH_SUMMARY_PARAGRAPHS}}
+          </article>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">2. 精選高頻學術句型與句構拆解</h3>
+          <div class="grid grid-cols-1 gap-4">
+            {{SENTENCE_PATTERNS_HTML}}
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">3. 核心學術單字庫</h3>
+          <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="vocab-caption">
+            <table class="text-xs text-slate-700">
+              <caption id="vocab-caption" class="visually-hidden">核心學術英語單字與用法表格</caption>
+              <thead class="font-bold text-slate-800 border-b border-slate-200">
+                <tr>
+                  <th scope="col" class="p-3">英文詞彙 (Vocabulary)</th>
+                  <th scope="col" class="p-3">詞性</th>
+                  <th scope="col" class="p-3">中文釋義</th>
+                  <th scope="col" class="p-3">論文語境與用法解析</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                {{VOCABULARY_ROWS_HTML}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 個人自訂重點劃線與筆記本區塊 -->
+      <section id="user-highlights-section" class="bg-white border border-amber-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-amber-50 text-amber-600 rounded-2xl">
+              <i data-lucide="highlighter" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">個人重點劃線筆記本 (My Saved Highlights)</h2>
+              <p class="text-xs text-slate-500">在上方內文反白文字即可選擇螢光筆顏色畫重點，瀏覽器會自動儲存您的個人劃線（點擊內文畫線處即可移除）</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="user-highlights-list" class="space-y-3"></div>
+      </section>
+
+      <footer class="text-center text-xs text-slate-400 py-8 border-t border-slate-200 space-y-1">
+        <div>Paper Reading Hub &bull; 依據 <code>AGENTS.md</code> 與 <code>paper-reading</code> 四大模組生成</div>
+        <div class="text-[11px]">文獻來源：{{AUTHORS}} <em>{{JOURNAL_CITATION}}</em>. doi:{{DOI}}</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- 原生 <dialog> 方法學詳細彈出視窗 -->
+  <dialog id="method-modal" closedby="any" aria-labelledby="modal-title" class="w-full bg-white text-slate-800">
+    <div class="p-6 sm:p-8 space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div class="flex items-center space-x-3">
+          <div class="p-2.5 rounded-xl bg-blue-50 text-blue-600">
+            <i id="modal-icon" data-lucide="database" class="w-5 h-5" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 id="modal-title" class="text-lg font-bold text-slate-900">方法學詳細介紹</h2>
+            <p id="modal-subtitle" class="text-xs text-slate-500">深入參數與執行流程</p>
+          </div>
+        </div>
+        <form method="dialog">
+          <button type="submit" aria-label="關閉方法學視窗" class="p-2 text-slate-500 hover:text-slate-900 rounded-xl hover:bg-slate-100">
+            <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+
+      <div id="modal-body" class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed"></div>
+
+      <form method="dialog" class="border-t border-slate-100 pt-4 flex justify-end">
+        <button type="submit" autofocus class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold">
+          關閉視窗
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    window.PAPER_METHOD_DETAILS = {
+      design: {
+        title: '1. 研究設計與收案場域',
+        subtitle: '{{METHOD_DESIGN_SUBTITLE}}',
+        icon: 'database',
+        content: '{{METHOD_DESIGN_MODAL_HTML}}'
+      },
+      stats: {
+        title: '2. 資料收集與統計分析模型',
+        subtitle: '{{METHOD_STATS_SUBTITLE}}',
+        icon: 'calculator',
+        content: '{{METHOD_STATS_MODAL_HTML}}'
+      }
+    };
+  </script>
+  <script src="../assets/js/paper-page.js"></script>
+</body>
+</html>
