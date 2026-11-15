@@ -18,5 +18,25 @@
     "elevator_hook": "過去人工評鑑一篇臨床指引要花 15 分鐘、直接用 LLM 又常被表面關鍵字騙；本研究證實把專家共識寫進結構化手冊＋RAG，能讓 DeepSeek-R1 一致性跳升至 ICC 0.71，速度還快近 3 倍。",
     "url": "papers/jmir-2026-cpg-ai.html",
     "added_at": "2026-11-14"
+  },
+  {
+    "id": "jama-2025-asthma-relievers",
+    "title_zh": "氣喘吸入型緩解治療：系統性回顧與統合分析",
+    "title_en": "Inhaled Reliever Therapies for Asthma: A Systematic Review and Meta-Analysis",
+    "authors": "Rayner DG, Ferri DM, Guyatt GH, et al.",
+    "journal": "JAMA",
+    "year": 2025,
+    "impact_factor": "文獻未報告",
+    "quartile": "文獻未報告",
+    "doi": "10.1001/jama.2024.22700",
+    "tags": ["氣喘", "網絡統合分析", "ICS", "緩解治療"],
+    "key_metrics": [
+      { "label": "納入研究", "value": "27 RCTs" },
+      { "label": "總樣本", "value": "50,496 人" },
+      { "label": "ICS-formoterol", "value": "RR 0.65" }
+    ],
+    "elevator_hook": "27 項 RCT 顯示，緩解時同步給予 ICS 比 SABA 單用更能降低嚴重惡化；ICS-formoterol RR 0.65、ICS-SABA RR 0.84，且未增加嚴重不良事件。",
+    "url": "papers/jama-2025-asthma-relievers.html",
+    "added_at": "2026-11-15"
   }
 ]
