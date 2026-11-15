@@ -1,0 +1,22 @@
+[
+  {
+    "id": "jmir-2026-cpg-ai",
+    "title_zh": "透過結構化導引提升人類專家與 AI Agent 的臨床實踐指引評鑑品質",
+    "title_en": "Improving Clinical Practice Guideline Appraisal Quality Among Human Experts and AI Agents Through Structured Guidance",
+    "authors": "Mao X, Wang J, Zhu S, Li K, et al.",
+    "journal": "Journal of Medical Internet Research (JMIR)",
+    "year": 2026,
+    "impact_factor": "5.8–7.4",
+    "quartile": "Q1 (醫學資訊第 1 名)",
+    "doi": "10.2196/96002",
+    "tags": ["AI Agent", "實證醫學", "AGREE II / RIGHT", "復健醫療"],
+    "key_metrics": [
+      { "label": "納入指引", "value": "227 篇" },
+      { "label": "AI 一致性", "value": "ICC 0.709" },
+      { "label": "評鑑效率", "value": "5.44 分/篇" }
+    ],
+    "elevator_hook": "過去人工評鑑一篇臨床指引要花 15 分鐘、直接用 LLM 又常被表面關鍵字騙；本研究證實把專家共識寫進結構化手冊＋RAG，能讓 DeepSeek-R1 一致性跳升至 ICC 0.71，速度還快近 3 倍。",
+    "url": "papers/jmir-2026-cpg-ai.html",
+    "added_at": "2026-11-14"
+  }
+]
