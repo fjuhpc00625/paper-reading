@@ -1,6 +1,66 @@
 # AGENTS.md — Paper Reading Hub 專案開發與擴充規範
 
-本文件為 **Paper Reading Hub（實證期刊文獻互動導讀與學術英語精讀平台）** 之最高指導規範。任何 AI Coding Agent 在閱讀、修改或為本專案新增頁面時，**必須先完整閱讀並嚴格遵守本文件所有規則**，確保未來每一篇新增的文獻導讀頁面都能維持一致的結構、風格、無障礙體驗與資料同步。
+本文件為 **Paper Reading Hub（實證期刊文獻互動導讀與學術英語精讀平台）** 之最高指導規範。當 OpenAI Codex、Claude Code、Cursor 或 Antigravity 連結本 GitHub 專案時，**必須自動載入並嚴格遵守本文件所有規則**。
+
+---
+
+## ⚡ 0. 自動觸發規則與四大模組完整輸出規格 (Zero-Prompt Trigger for Codex)
+
+**【最高優先級指令】當使用者在對話中「上傳 PDF 檔案」、「貼上期刊論文網址 (URL)」或「貼上論文內容」（包含使用者只上傳檔案、或輸入「解析這篇論文 / 讀這篇 paper」等簡短指令）時，你必須無條件啟動 `paper-reading` 導讀模式，禁止只做一般簡短摘要！**
+
+請立即依照以下 **「步驟 A（對話視窗完整輸出四大模組）」** 與 **「步驟 B（儲存庫新增獨立網頁）」** 執行：
+
+### 步驟 A：在對話回覆中完整輸出以下「四大核心導讀模組」（缺一不可）
+
+#### 📌 模組一：論文核心結構化拆解
+請逐一完整列出以下 5 項（所有統計數據必須來自原文，若未報告請註明 `文獻未報告`）：
+1. **1️⃣ 主題與 PICO 架構**
+   - **論文題目**（中英對照）與 **期刊資訊**（期刊名、年份、Impact Factor / Q1–Q4 分區）。
+   - **P (Population / Problem)**：研究對象、納入/排除條件、臨床或研究痛點。
+   - **I (Intervention / Exposure)**：介入措施、AI/治療方案或暴露因素。
+   - **C (Comparison / Control)**：對照組設定。
+   - **O (Outcomes)**：主要結局指標（Primary Outcomes）與次要結局指標（Secondary Outcomes）。
+2. **2️⃣ 研究方法 (Methodology)**
+   - **研究設計**（如 RCT、世代研究、系統性回顧與統合分析、析因實驗等）。
+   - **研究場域與樣本量 ($N$)**。
+   - **資料收集與統計分析方法**（使用的檢定模型、軟體或評估工具）。
+3. **3️⃣ 研究發現及主要結果（含具體統計數據）**
+   - **必須列出具體數值**：點估計值、效果量（Effect Size, OR, RR, HR, ICC, Mean Difference 等）、**95% 信賴區間 (95% CI)**、**$p$ 值**。
+   - 清楚說明組間是否具統計顯著差異及其實質意義。
+4. **4️⃣ 重要性 (Significance)**
+   - **學術價值**：填補了什麼知識空白？
+   - **臨床/實務應用價值**：對臨床指引、決策或實務帶來什麼改變？
+5. **5️⃣ 結論與具體行動建議 (Conclusion & Takeaways)**
+   - 作者總結 + 給實務工作者或研究者的 **3 點具體行動建議**。
+
+#### 🎤 模組二：電梯簡報 (Elevator Pitch，30–60 秒快速口頭報告)
+模擬在電梯中向主任、指導教授或專家用 **30～60 秒口語化** 快速介紹本篇論文，必須拆分為 4 段對話腳本：
+- **Hook（痛點/背景）**：我們過去一直面臨什麼難題？
+- **Action（研究做了什麼）**：這篇研究做了什麼關鍵試驗？
+- **Punchline（核心震撼發現）**：結果發現了什麼（帶出 1～2 個最關鍵的震撼數據）！
+- **Impact（實務影響）**：這告訴我們未來應該如何調整做法。
+
+#### ⚖️ 模組三：文獻批判 (Critiques & Critical Appraisal)
+1. **研究優勢 (Strengths)**：研究設計嚴謹度、樣本規模、盲法或創新亮點。
+2. **研究限制與弱點 (Weaknesses & Limitations)**：
+   - **偏差風險 (Risk of Bias)**：選擇偏差、測量偏差、干擾因子等。
+   - **外推性限制 (External Validity / Generalizability)**：樣本是否受限於特定地區、語系、專科或族群？
+3. **對未來研究或應用的啟發**。
+
+#### 🇬🇧 模組四：英文文獻閱讀與句型精讀 (Academic English Digest)
+1. **論文核心英文摘要精讀 (Academic Summary in English)**：
+   - 以流暢的高階學術英文撰寫 **2～3 段結構完整的英文短文**（涵蓋 Background, Key Statistical Findings, Clinical Implications），並標出核心金句。
+2. **精選學術句型與句構分析 (Key Sentence Patterns)**：
+   - 挑出 **2～3 個代表性高頻學術句型**，解析句構特點並提供中英對照與寫作仿寫範例。
+3. **重要學術與專業單字庫 (Academic Vocabulary Table)**：
+   - 以 Markdown 表格列出 **5～8 個關鍵學術/專業詞彙**：
+     | 英文詞彙 (Vocabulary) | 詞性 | 中文釋義 | 論文語境例句與用法解析 |
+     | :--- | :--- | :--- | :--- |
+
+---
+
+### 步驟 B：同步建立新論文網頁並上架至首頁（若處於專案編碼環境）
+完成上述四大模組解析後，請依本文件 **Section 5（新增論文頁面的標準流程）**，自動複製 `templates/paper-template.html` 建立 `papers/<journal>-<year>-<keyword>.html`（內含 `<mark class="ai-hl ...">` 四色語意重點劃線），並同步將新論文 Metadata 寫入 `data/papers.json` 與 `index.html` 的 `#papers-fallback`。
 
 ---
 
