@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>結構化指引提升人類專家與 AI Agent 臨床實踐指引評鑑品質 | Paper Reading Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+  <a href="#main-content" class="skip-link visually-hidden">跳至主要內容</a>
+
+  <!-- 反白文字自動浮現之快速螢光筆色盤 -->
+  <div
+    id="selection-hl-popover"
+    hidden
+    class="bg-slate-900 text-white px-2.5 py-1.5 rounded-2xl shadow-xl border border-slate-700 flex items-center gap-1.5 text-xs"
+    role="group"
+    aria-label="反白文字快速劃線選單"
+  >
+    <span class="text-[11px] text-slate-300 font-semibold px-1">畫重點：</span>
+    <button type="button" data-apply-hl="yellow" aria-label="以黃色螢光筆標記重點" title="黃色：核心重點" class="px-2 py-1 rounded-lg bg-yellow-300 text-slate-950 font-bold hover:brightness-95">黃</button>
+    <button type="button" data-apply-hl="green" aria-label="以綠色螢光筆標記數據" title="綠色：關鍵數據" class="px-2 py-1 rounded-lg bg-emerald-300 text-slate-950 font-bold hover:brightness-95">綠</button>
+    <button type="button" data-apply-hl="purple" aria-label="以紫色螢光筆標記佳句" title="紫色：英文佳句" class="px-2 py-1 rounded-lg bg-purple-300 text-slate-950 font-bold hover:brightness-95">紫</button>
+  </div>
+
+  <!-- 行動裝置頂部導航列 -->
+  <header class="lg:hidden bg-white border-b border-slate-200 px-4 py-3 sticky top-0 z-40 flex items-center justify-between shadow-xs">
+    <div class="flex items-center space-x-2.5 min-w-0">
+      <a href="../index.html" class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white flex-shrink-0" aria-label="返回文獻總覽首頁">
+        <i data-lucide="arrow-left" class="w-4 h-4" aria-hidden="true"></i>
+      </a>
+      <div class="min-w-0">
+        <div class="font-bold text-slate-900 text-sm truncate">結構化導引與 AI 指引評鑑</div>
+        <div class="text-[11px] text-slate-500 truncate">JMIR (2026) &bull; Paper Reading 4 大模組</div>
+      </div>
+    </div>
+    <button
+      id="mobile-menu-btn"
+      type="button"
+      aria-label="開啟章節導覽選單"
+      aria-expanded="false"
+      aria-controls="sidebar"
+      class="p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100"
+    >
+      <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
+    </button>
+  </header>
+
+  <div class="min-h-screen flex">
+    <!-- 左側固定側邊欄導航 -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-30 w-80 bg-white border-r border-slate-200 flex flex-col justify-between transition-transform duration-300 transform -translate-x-full lg:translate-x-0 lg:static lg:h-screen lg:sticky lg:top-0">
+      <div class="p-6 overflow-y-auto space-y-6">
+        <div class="space-y-4">
+          <a href="../index.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-blue-900">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            <span>返回文獻總覽 (Paper Hub)</span>
+          </a>
+
+          <div class="flex items-center space-x-3">
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/20 flex-shrink-0">
+              <i data-lucide="cpu" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <div class="font-extrabold text-slate-900 text-sm tracking-tight">實證醫學與 AI 導讀</div>
+              <div class="text-xs text-slate-500 font-medium">Paper Reading 4 大模組</div>
+            </div>
+          </div>
+        </div>
+
+        <nav aria-label="本篇文獻章節導覽" class="space-y-1">
+          <a href="#overview" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all active-nav">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 text-blue-600" aria-hidden="true"></i>
+            <span>論文概覽與期刊指標</span>
+          </a>
+          <a href="#module-1-pico" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="crosshair" class="w-4 h-4 text-indigo-600" aria-hidden="true"></i>
+            <span>模組 1.1 主題與 PICO</span>
+          </a>
+          <a href="#module-1-method" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="git-branch" class="w-4 h-4 text-cyan-600" aria-hidden="true"></i>
+            <span>模組 1.2 研究方法細節</span>
+          </a>
+          <a href="#module-1-results" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="bar-chart-3" class="w-4 h-4 text-emerald-600" aria-hidden="true"></i>
+            <span>模組 1.3 研究發現與數據</span>
+          </a>
+          <a href="#module-1-significance" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="sparkles" class="w-4 h-4 text-sky-600" aria-hidden="true"></i>
+            <span>模組 1.4–1.5 重要性與結論</span>
+          </a>
+          <a href="#module-2-pitch" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="mic" class="w-4 h-4 text-amber-600" aria-hidden="true"></i>
+            <span>模組 2. 電梯簡報 (Pitch)</span>
+          </a>
+          <a href="#module-3-critiques" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="scale" class="w-4 h-4 text-rose-500" aria-hidden="true"></i>
+            <span>模組 3. 文獻批判 (Critiques)</span>
+          </a>
+          <a href="#module-4-english" class="nav-item flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <i data-lucide="languages" class="w-4 h-4 text-violet-600" aria-hidden="true"></i>
+            <span>模組 4. 英文精讀與詞彙庫</span>
+          </a>
+          <a href="#user-highlights-section" class="nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm text-slate-600 hover:bg-slate-100 transition-all">
+            <span class="flex items-center space-x-3">
+              <i data-lucide="highlighter" class="w-4 h-4 text-amber-500" aria-hidden="true"></i>
+              <span>重點劃線筆記本</span>
+            </span>
+            <span id="user-hl-count" class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-extrabold font-mono-metric">0</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- 期刊排行速覽卡片 -->
+      <div class="p-4 m-4 bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl shadow-md">
+        <div class="flex items-center justify-between text-xs font-semibold mb-2">
+          <span class="flex items-center gap-1 text-blue-200">
+            <i data-lucide="bookmark-check" class="w-3.5 h-3.5 text-blue-400" aria-hidden="true"></i>
+            <span>JMIR (2026)</span>
+          </span>
+          <span class="text-[10px] bg-emerald-400 text-slate-950 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Q1 頂尖期刊</span>
+        </div>
+        <div class="text-xs text-slate-300">
+          Impact Factor: <strong class="text-white font-bold">5.8–7.4</strong><br>
+          <span class="text-[11px] text-slate-400">醫學資訊與數位健康領域第 1 名</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主內容區 -->
+    <main id="main-content" data-ai-highlights="on" tabindex="-1" class="flex-1 min-w-0 max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-6 sm:py-10 space-y-8">
+
+      <!-- 頂部固定 Paper 重點劃線工具列 (Accessible Toolbar) -->
+      <div class="sticky top-2 z-20 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-3 shadow-sm space-y-2">
+        <div
+          id="highlight-toolbar"
+          role="toolbar"
+          focusgroup="toolbar wrap"
+          aria-label="Paper 重點劃線與筆記工具列"
+          aria-controls="main-content"
+          class="flex flex-wrap items-center justify-between gap-2"
+        >
+          <!-- Group 1: AI 預標註重點開關 -->
+          <div role="group" aria-label="AI 自動重點劃線顯示設定" class="flex flex-wrap items-center gap-2">
+            <button
+              id="btn-toggle-ai-hl"
+              type="button"
+              aria-pressed="true"
+              class="px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-300 transition-colors inline-flex items-center gap-1.5"
+            >
+              <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>AI 重點劃線</span>
+            </button>
+
+            <div class="hidden xl:flex items-center gap-1.5 text-[11px] text-slate-600 pl-1">
+              <span class="px-2 py-0.5 rounded bg-yellow-200/80 text-slate-900 font-semibold">黃：核心發現</span>
+              <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-950 font-semibold">藍：研究方法</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-950 font-semibold">綠：實務結論</span>
+              <span class="px-2 py-0.5 rounded bg-violet-100 text-violet-950 font-semibold">紫：英文金句</span>
+            </div>
+          </div>
+
+          <span role="separator" aria-orientation="vertical" class="hidden sm:inline-block"></span>
+
+          <!-- Group 2: 讀者反白自訂螢光筆與匯出 -->
+          <div role="group" aria-label="讀者自訂反白螢光筆與筆記匯出" class="flex flex-wrap items-center gap-1.5">
+            <span class="text-[11px] text-slate-500 font-semibold mr-1">反白畫線：</span>
+            <button
+              type="button"
+              data-apply-hl="yellow"
+              aria-label="將選取文字標記為黃色重點"
+              title="反白文字後點此標記為黃色"
+              class="px-2.5 py-1 rounded-lg bg-yellow-200 hover:bg-yellow-300 text-slate-900 text-xs font-bold border border-yellow-400"
+            >
+              黃色
+            </button>
+            <button
+              type="button"
+              data-apply-hl="green"
+              aria-label="將選取文字標記為綠色數據"
+              title="反白文字後點此標記為綠色"
+              class="px-2.5 py-1 rounded-lg bg-emerald-200 hover:bg-emerald-300 text-slate-900 text-xs font-bold border border-emerald-400"
+            >
+              綠色
+            </button>
+            <button
+              type="button"
+              data-apply-hl="purple"
+              aria-label="將選取文字標記為紫色佳句"
+              title="反白文字後點此標記為紫色"
+              class="px-2.5 py-1 rounded-lg bg-purple-200 hover:bg-purple-300 text-slate-900 text-xs font-bold border border-purple-400"
+            >
+              紫色
+            </button>
+
+            <button
+              id="btn-copy-all-hl"
+              type="button"
+              class="ml-1 px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-800 text-xs font-bold border border-blue-200 inline-flex items-center gap-1"
+            >
+              <i data-lucide="clipboard-List" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>複製重點 Markdown</span>
+            </button>
+            <button
+              id="btn-clear-user-hl"
+              type="button"
+              class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-700 text-xs font-bold border border-slate-200"
+            >
+              清除自訂
+            </button>
+          </div>
+        </div>
+        <p id="hl-toolbar-status" role="status" class="text-[11px] font-semibold text-blue-700 min-h-[1rem] px-1"></p>
+      </div>
+
+      <!-- (0) 論文核心概覽與 Metadata -->
+      <section id="overview" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-200/80">227 篇復健臨床指引</span>
+          <span class="px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-full border border-purple-200/80">AI Agent 對決人類專家</span>
+          <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-200/80">AGREE II &amp; RIGHT</span>
+        </div>
+
+        <div class="space-y-2">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight">
+            透過結構化導引提升人類專家與 AI Agent 的臨床實踐指引評鑑品質
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium" lang="en">
+            Improving Clinical Practice Guideline Appraisal Quality Among Human Experts and AI Agents Through Structured Guidance
+          </p>
+        </div>
+
+        <p class="text-slate-700 leading-relaxed text-sm sm:text-base">
+          本研究全面回顧了 <mark class="ai-hl ai-hl-method">227 篇中英文復健臨床實踐指引 (CPGs)，同步採用 AGREE II 與 RIGHT 雙工具</mark>剖析其方法學與報告品質。研究發現目前指引在<mark class="ai-hl ai-hl-finding">「適用性 (Applicability)」平均得分最低（僅 35.9%），且僅 14.1% 達高品質標準</mark>；並創新證實：<mark class="ai-hl ai-hl-finding">透過專家共識發展之「結構化評鑑手冊 (Workbook)」結合 RAG，能使 DeepSeek-R1 與人類專家的一致性 ICC 從 0.613 躍升至 0.709，並將單篇評鑑耗時縮短至 5.44 分鐘（快近 3 倍）</mark>。
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2 border-t border-slate-100">
+          <div class="lg:col-span-8 space-y-3 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p><strong class="text-slate-900">作者群：</strong>毛興潤 (Xingrun Mao)*、王駿浩 (Junhao Wang)*、王澤彰、張宇薇、邱詩雨、葉靜雨、何世彥、王重陽、夏勇、何成奇、李珂 (Ke Li)*、朱思藝 (Siyi Zhu)*（通訊作者）</p>
+            <p><strong class="text-slate-900">研究單位：</strong>四川大學華西醫院復健醫學中心與復健醫學研究所；西南財經大學統計與數據科學學院</p>
+            <div class="flex flex-wrap gap-x-5 gap-y-2 pt-1 text-xs">
+              <span><strong>期刊：</strong><em>J Med Internet Res</em>. 2026;28:e96002</span>
+              <span><strong>DOI：</strong><a href="https://doi.org/10.2196/96002" target="_blank" rel="noopener noreferrer" class="text-blue-700 font-semibold hover:underline">10.2196/96002</a></span>
+              <span><strong>PROSPERO：</strong>CRD420251270676</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3">
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80">
+              <div class="text-[11px] text-slate-500 font-bold">指引高品質比例</div>
+              <div class="text-lg font-extrabold text-slate-900 font-mono-metric">僅 14.1% (32/227)</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-200/80">
+              <div class="text-[11px] text-emerald-700 font-bold">AI 一致性躍升</div>
+              <div class="text-lg font-extrabold text-emerald-800 font-mono-metric">ICC 0.613 &rarr; 0.709</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-blue-50/70 border border-blue-200/80">
+              <div class="text-[11px] text-blue-700 font-bold">AI 單篇評鑑耗時</div>
+              <div class="text-lg font-extrabold text-blue-800 font-mono-metric">5.44 分鐘 (快近 3 倍)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組一：1.1 主題與 PICO -->
+      <section id="module-1-pico" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
+            <i data-lucide="crosshair" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 1.1｜主題與 PICO 架構</h2>
+            <p class="text-xs text-slate-500">以標準實證醫學 PICO 框架拆解本研究核心問題</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-amber-50/70 border-l-4 border-amber-500 text-xs sm:text-sm text-slate-700 leading-relaxed">
+          <strong class="text-amber-950">研究核心主題：</strong>全面評估中英文復健臨床實踐指引 (CPGs) 的方法學與報告品質，並驗證<mark class="ai-hl ai-hl-method">「專家共識結構化評鑑手冊 (Workbook)」搭配 RAG 檢索增強生成</mark>，能否突破人類專家耗時過長與未導引 LLM 過度樂觀評分的雙重瓶頸。
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-blue-700 uppercase tracking-wider">P &bull; Population / Problem（研究對象與問題）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <strong>227 篇中英文復健臨床實踐指引 (CPGs)</strong>（含 163 篇英文、64 篇中文；其中 221 篇、共 5,083 個單項進入 AI 析因實驗），以及 <strong>6 篇前十字韌帶重建 (ACL)</strong> 外部泛化驗證指引；評鑑者包含人類專家與推理型大語言模型。
+            </p>
+          </div>
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-indigo-700 uppercase tracking-wider">I &bull; Intervention（介入措施）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              導入專家共識發展之<mark class="ai-hl ai-hl-method">結構化評鑑手冊 (Workbook)，將 AGREE II 原 7 分量表細化為高/低/極低三級明確操作定義與實例</mark>，並透過 <strong>LangChain + RAG 向量檢索</strong>賦能給 <strong>DeepSeek-R1</strong> 與 <strong>OpenAI o1-mini</strong> AI Agent。
+            </p>
+          </div>
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-cyan-700 uppercase tracking-wider">C &bull; Comparison（對照組）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              1. <strong>無手冊導引的基準 AI Agent</strong>（僅提供 AGREE II 原始官方條目標準）。<br>
+              2. <strong>人類專家獨立評分與三輪專家共識會議</strong>（作為 Golden Reference 標準與耗時對照基準）。
+            </p>
+          </div>
+          <div class="p-5 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-1.5">
+            <div class="text-xs font-extrabold text-emerald-700 uppercase tracking-wider">O &bull; Outcomes（結局指標）</div>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <strong>主要結局：</strong>與人類專家共識之一致性（序數加權修正型 <strong>ICC</strong>）、AGREE II 品質得分與 RIGHT 報告率、高品質指引預測因子 (OR)。<br>
+              <strong>次要結局：</strong>單篇指引評鑑耗時（分鐘）與跨專科外部驗證一致性。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組一：1.2 研究方法 -->
+      <section id="module-1-method" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-cyan-50 text-cyan-600 rounded-2xl">
+              <i data-lucide="git-branch" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">模組 1.2｜研究方法 (Methodology)</h2>
+              <p class="text-xs text-slate-500">系統性回顧 + 統合分析 + 2x2 析因 AI 實驗 + 跨專科外部驗證（點擊卡片檢視完整細節）</p>
+            </div>
+          </div>
+          <span class="text-xs text-cyan-700 bg-cyan-50 px-3 py-1 rounded-full font-bold border border-cyan-200">點擊卡片開啟詳情</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <button type="button" data-method-key="search" class="text-left p-5 rounded-2xl border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all bg-white group">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2.5 font-bold text-slate-900 text-sm">
+                <div class="p-2 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <i data-lucide="database" class="w-4 h-4" aria-hidden="true"></i>
+                </div>
+                <span>1. 文獻檢索與 PRISMA 流程</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-all" aria-hidden="true"></i>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">檢索 150,957 筆中英文與指引資料庫文獻，最終納入 227 篇復健臨床實踐指引（163 篇英文、64 篇中文）。</p>
+            <div class="mt-3 text-[11px] text-blue-700 font-semibold">點擊開啟檢索數據與納入細節 &rarr;</div>
+          </button>
+
+          <button type="button" data-method-key="appraisal" class="text-left p-5 rounded-2xl border border-slate-200 hover:border-cyan-400 hover:shadow-md transition-all bg-white group">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2.5 font-bold text-slate-900 text-sm">
+                <div class="p-2 bg-cyan-50 text-cyan-600 rounded-xl group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                  <i data-lucide="file-check" class="w-4 h-4" aria-hidden="true"></i>
+                </div>
+                <span>2. AGREE II、RIGHT 與結構化評鑑手冊</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-cyan-600 transition-all" aria-hidden="true"></i>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">結合 AGREE II (23 條目) 與 RIGHT (35 條目)，透過專家共識將 7 分量表轉化為高/低/極低三級評鑑手冊。</p>
+            <div class="mt-3 text-[11px] text-cyan-700 font-semibold">點擊開啟手冊設計原則 &rarr;</div>
+          </button>
+
+          <button type="button" data-method-key="ai" class="text-left p-5 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:shadow-md transition-all bg-white group">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2.5 font-bold text-slate-900 text-sm">
+                <div class="p-2 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                  <i data-lucide="bot" class="w-4 h-4" aria-hidden="true"></i>
+                </div>
+                <span>3. RAG 增強型 AI Agent 析因實驗</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-indigo-600 transition-all" aria-hidden="true"></i>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">使用 LangChain 搭配 DeepSeek-R1 與 o1-mini，在 221 篇指引共 5,083 個評分項目進行知識庫對照實驗。</p>
+            <div class="mt-3 text-[11px] text-indigo-700 font-semibold">點擊開啟 AI 架構與實驗配置 &rarr;</div>
+          </button>
+
+          <button type="button" data-method-key="stats" class="text-left p-5 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:shadow-md transition-all bg-white group">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center space-x-2.5 font-bold text-slate-900 text-sm">
+                <div class="p-2 bg-emerald-50 text-emerald-600 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                  <i data-lucide="calculator" class="w-4 h-4" aria-hidden="true"></i>
+                </div>
+                <span>4. 統計分析模型與外部 ACL 驗證</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-all" aria-hidden="true"></i>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">採用序數修正型 ICC、Firth 懲罰邏輯斯迴歸與 HKSJ 隨機效果模型，並以 6 篇 ACL 指引測試跨專科耗時。</p>
+            <div class="mt-3 text-[11px] text-emerald-700 font-semibold">點擊開啟統計方法與驗證設計 &rarr;</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- 模組一：1.3 研究發現及主要結果 -->
+      <section id="module-1-results" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6 tabs-container">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-emerald-50 text-emerald-600 rounded-2xl">
+            <i data-lucide="bar-chart-3" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 1.3｜研究發現及主要統計結果</h2>
+            <p class="text-xs text-slate-500">支援點擊或鍵盤方向鍵切換 5 個核心統計結果分頁（亦可直接使用瀏覽器 Ctrl+F / Cmd+F 搜尋）</p>
+          </div>
+        </div>
+
+        <div role="tablist" aria-label="研究統計結果切換" class="p-1.5 bg-slate-100 rounded-2xl">
+          <button type="button" role="tab" id="tab-ai" data-panel="panel-ai" aria-selected="true" tabindex="0" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            AI 一致性 (ICC)
+          </button>
+          <button type="button" role="tab" id="tab-agree" data-panel="panel-agree" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            AGREE II 六大領域
+          </button>
+          <button type="button" role="tab" id="tab-right" data-panel="panel-right" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            RIGHT 報告率統合
+          </button>
+          <button type="button" role="tab" id="tab-regression" data-panel="panel-regression" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            高品質預測迴歸
+          </button>
+          <button type="button" role="tab" id="tab-efficiency" data-panel="panel-efficiency" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-700">
+            評鑑耗時與 ACL 驗證
+          </button>
+        </div>
+
+        <!-- Tab Panel 1: AI 一致性 -->
+        <div id="panel-ai" role="tabpanel" aria-labelledby="tab-ai" tabindex="0">
+          <div class="space-y-4">
+            <div class="p-6 rounded-3xl bg-slate-900 text-white space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                <div>
+                  <h3 class="text-sm font-bold text-emerald-400">AI Agent 與人類專家評鑑一致性比較 (修正型 ICC)</h3>
+                  <p class="text-xs text-slate-400">資料規模：221 篇復健指引 &bull; 共 5,083 個評估條目</p>
+                </div>
+                <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-lg border border-emerald-500/30 font-semibold">結構化手冊顯著增益</span>
+              </div>
+
+              <div class="overflow-x-auto">
+                <svg viewBox="0 0 680 185" role="img" aria-label="修正型 ICC 橫條比較圖：人類初評 0.752、人類共識 0.900、DeepSeek-R1 無手冊 0.613、DeepSeek-R1 手冊導引 0.709、o1-mini 0.629 提升至 0.687" class="w-full max-w-2xl mx-auto text-xs font-mono-metric">
+                  <line x1="200" y1="165" x2="640" y2="165" stroke="#475569" stroke-width="1.5" />
+                  <text x="190" y="34" fill="#f8fafc" text-anchor="end">人類專家初評 (無手冊)</text>
+                  <rect x="200" y="20" width="330" height="16" fill="#10b981" rx="3" />
+                  <text x="538" y="33" fill="#34d399" font-weight="bold">0.752</text>
+
+                  <text x="190" y="64" fill="#94a3b8" text-anchor="end">人類專家共識 (手冊)</text>
+                  <rect x="200" y="50" width="396" height="16" fill="#059669" rx="3" />
+                  <text x="604" y="63" fill="#6ee7b7" font-weight="bold">0.900 (0.84–0.92)</text>
+
+                  <text x="190" y="96" fill="#cbd5e1" text-anchor="end">DeepSeek-R1 (無手冊)</text>
+                  <rect x="200" y="82" width="270" height="16" fill="#64748b" rx="3" />
+                  <text x="478" y="95" fill="#cbd5e1">0.613</text>
+
+                  <text x="190" y="126" fill="#38bdf8" text-anchor="end" font-weight="bold">DeepSeek-R1 (手冊導引)</text>
+                  <rect x="200" y="112" width="312" height="16" fill="#0284c7" rx="3" />
+                  <text x="520" y="125" fill="#38bdf8" font-weight="bold">0.709 (+0.096)</text>
+
+                  <text x="190" y="156" fill="#e2e8f0" text-anchor="end">o1-mini (無手冊 &rarr; 手冊)</text>
+                  <rect x="200" y="142" width="302" height="16" fill="#818cf8" rx="3" />
+                  <text x="510" y="155" fill="#c7d2fe">0.629 &rarr; 0.687</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+                <div class="text-xs text-emerald-800 font-bold">DeepSeek-R1 + 手冊</div>
+                <div class="text-xl font-extrabold text-emerald-700 mt-1 font-mono-metric">ICC = 0.709</div>
+                <div class="text-[11px] text-emerald-700 mt-0.5">達優良一致性標準（較基準 +0.096）</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200">
+                <div class="text-xs text-blue-800 font-bold">o1-mini + 手冊</div>
+                <div class="text-xl font-extrabold text-blue-700 mt-1 font-mono-metric">ICC = 0.687</div>
+                <div class="text-[11px] text-blue-700 mt-0.5">推理對齊度顯著提升（基準為 0.629）</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <div class="text-xs text-slate-700 font-bold">人類專家三輪共識</div>
+                <div class="text-xl font-extrabold text-slate-900 mt-1 font-mono-metric">ICC = 0.84–0.92</div>
+                <div class="text-[11px] text-slate-600 mt-0.5">初評低至 -0.09~0.66，共識後達極高水準</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Panel 2: AGREE II 六大領域 -->
+        <div id="panel-agree" role="tabpanel" aria-labelledby="tab-agree" hidden="until-found">
+          <div class="space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">AGREE II 六大領域品質得分 (227 篇復健指引)</h3>
+                <p class="text-xs text-slate-500"><mark class="ai-hl ai-hl-finding">僅 32/227 篇 (14.1%) 達高品質標準（&ge;5 個領域得分 &ge;60%）</mark></p>
+              </div>
+              <span class="text-xs bg-rose-50 text-rose-700 font-bold px-3 py-1 rounded-full border border-rose-200">85.9% 屬低品質</span>
+            </div>
+
+            <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="agree-table-caption">
+              <table class="text-xs text-slate-700">
+                <caption id="agree-table-caption" class="visually-hidden">AGREE II 六大領域整體與中英文指引得分及 p 值比較</caption>
+                <thead class="text-slate-800 font-bold border-b border-slate-200">
+                  <tr>
+                    <th scope="col" class="p-3">AGREE II 領域</th>
+                    <th scope="col" class="p-3">整體平均得分 (SD)</th>
+                    <th scope="col" class="p-3">英文指引 (n=163)</th>
+                    <th scope="col" class="p-3">中文指引 (n=64)</th>
+                    <th scope="col" class="p-3">統計檢定 P 值</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">領域 1：範圍與目的 (Scope &amp; Purpose)</th>
+                    <td class="p-3 text-emerald-700 font-bold font-mono-metric">73.0% (15.2)</td>
+                    <td class="p-3 font-mono-metric">74.6%</td>
+                    <td class="p-3 font-mono-metric">68.9%</td>
+                    <td class="p-3 text-blue-700 font-bold font-mono-metric">P = .004</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">領域 2：利害關係人參與 (Stakeholder Involvement)</th>
+                    <td class="p-3 text-amber-700 font-mono-metric">52.0% (17.2)</td>
+                    <td class="p-3 font-mono-metric">53.1%</td>
+                    <td class="p-3 font-mono-metric">49.1%</td>
+                    <td class="p-3 font-mono-metric">P = .12</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">領域 3：制訂嚴謹性 (Rigor of Development)</th>
+                    <td class="p-3 text-amber-700 font-mono-metric">49.3% (21.0)</td>
+                    <td class="p-3 font-mono-metric">51.4%</td>
+                    <td class="p-3 font-mono-metric">44.0%</td>
+                    <td class="p-3 text-blue-700 font-bold font-mono-metric">P = .02</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">領域 4：表達清晰度 (Clarity of Presentation)</th>
+                    <td class="p-3 text-emerald-700 font-bold font-mono-metric">72.7% (15.5)</td>
+                    <td class="p-3 font-mono-metric">72.6%</td>
+                    <td class="p-3 font-mono-metric">72.8%</td>
+                    <td class="p-3 font-mono-metric">P = .93</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">領域 5：適用性 (Applicability)</th>
+                    <td class="p-3 text-rose-700 font-black font-mono-metric">35.9% (18.8)</td>
+                    <td class="p-3 font-mono-metric">39.1%</td>
+                    <td class="p-3 text-rose-700 font-bold font-mono-metric">27.5%</td>
+                    <td class="p-3 text-rose-700 font-bold font-mono-metric">P &lt; .001</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">領域 6：編輯獨立性 (Editorial Independence)</th>
+                    <td class="p-3 text-amber-700 font-mono-metric">47.1% (27.9)</td>
+                    <td class="p-3 font-mono-metric">48.5%</td>
+                    <td class="p-3 font-mono-metric">43.5%</td>
+                    <td class="p-3 font-mono-metric">P = .21</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Panel 3: RIGHT 報告率 -->
+        <div id="panel-right" role="tabpanel" aria-labelledby="tab-right" hidden="until-found">
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">RIGHT 清單報告率與統合分析 (HKSJ 隨機效果模型)</h3>
+              <p class="text-xs text-slate-500">評估 7 大領域共 35 個條目的報告透明度</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-white border border-slate-200">
+                <div class="text-xs text-slate-500 font-semibold">語言差異（中文 vs 英文指引）</div>
+                <div class="text-xl font-black text-rose-700 mt-1 font-mono-metric">RD -0.07 [95% CI: -0.13 至 -0.02]</div>
+                <p class="text-xs text-slate-600 mt-1">中文指引報告率平均較英文指引顯著低 7%。</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-white border border-slate-200">
+                <div class="text-xs text-slate-500 font-semibold">時間趨勢（2017 RIGHT 發布後 vs 前）</div>
+                <div class="text-xl font-black text-emerald-700 mt-1 font-mono-metric">RD +0.19 [95% CI: +0.13 至 +0.26]</div>
+                <p class="text-xs text-slate-600 mt-1"><mark class="ai-hl ai-hl-finding">RIGHT 清單發布後，指引報告完整性顯著提升 19%</mark>。</p>
+              </div>
+            </div>
+            <div class="p-4 bg-white rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+              <strong>細項報告率概況：</strong>基本資訊 (70.5%) 與背景 (65.9%) 報告率最高；資金來源與利益衝突管理 (44.1%) 及亞組分析描述 (18.1%) 報告率明顯不足。
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Panel 4: 高品質預測迴歸 -->
+        <div id="panel-regression" role="tabpanel" aria-labelledby="tab-regression" hidden="until-found">
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">高品質 CPG 關鍵製程特徵多變項迴歸分析</h3>
+                <p class="text-xs text-slate-500">Firth 懲罰邏輯斯迴歸模型 (EPV = 10.67 &bull; 5 折交叉驗證 AUC = 0.75)</p>
+              </div>
+              <span class="text-xs font-bold text-blue-700 bg-blue-100 px-3 py-1 rounded-full">Firth 懲罰模型</span>
+            </div>
+
+            <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="regression-caption">
+              <table class="text-xs text-slate-700">
+                <caption id="regression-caption" class="visually-hidden">高品質指引製程特徵勝算比與 p 值</caption>
+                <thead class="font-bold text-slate-800 border-b border-slate-200">
+                  <tr>
+                    <th scope="col" class="p-3">指引製程特徵</th>
+                    <th scope="col" class="p-3">勝算比 Odds Ratio (95% CI)</th>
+                    <th scope="col" class="p-3">P 值</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                  <tr class="bg-emerald-50/40">
+                    <th scope="row" class="p-3 font-bold text-slate-900"><mark class="ai-hl ai-hl-finding">獨立外部審查 (External Review)</mark></th>
+                    <td class="p-3 text-emerald-700 font-bold font-mono-metric">OR 20.39 (4.66–89.27) [Firth OR 16.24]</td>
+                    <td class="p-3 text-emerald-700 font-bold font-mono-metric">P &lt; .001</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">正式共識方法 (Formal Consensus)</th>
+                    <td class="p-3 font-mono-metric">OR 1.78 (0.65–4.87)</td>
+                    <td class="p-3 font-mono-metric">P = .26</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="p-3 font-semibold text-slate-900">非正式共識方法 (Informal Consensus)</th>
+                    <td class="p-3 font-mono-metric">OR 1.17 (0.36–3.82)</td>
+                    <td class="p-3 font-mono-metric">P = .80</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Panel 5: 評鑑耗時與 ACL 驗證 -->
+        <div id="panel-efficiency" role="tabpanel" aria-labelledby="tab-efficiency" hidden="until-found">
+          <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">AI 評鑑效率與外部前十字韌帶 (ACL) 重建指引驗證</h3>
+              <p class="text-xs text-slate-500">以 6 篇外部 ACL 重建 CPGs 測試跨專科泛化能力與單篇耗時</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="p-4 rounded-2xl bg-white border border-slate-200">
+                <div class="text-xs text-slate-500 font-semibold">DeepSeek-R1 + 手冊單篇耗時</div>
+                <div class="text-2xl font-black text-emerald-700 mt-1 font-mono-metric">5.44 &plusmn; 0.16 分鐘</div>
+                <p class="text-xs text-slate-600 mt-1">人類專家 1 耗時 14.97 分鐘（AI 提速約 2.75 倍），專家 2 耗時 7.39 分鐘。</p>
+              </div>
+              <div class="p-4 rounded-2xl bg-white border border-slate-200">
+                <div class="text-xs text-slate-500 font-semibold">外部 ACL 指引評估一致性</div>
+                <div class="text-2xl font-black text-blue-700 mt-1 font-mono-metric">ICC = 0.711</div>
+                <p class="text-xs text-slate-600 mt-1">接近人類專家 1 (ICC = 0.734)，並超越追求速度的專家 2 (ICC = 0.651)。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組一：1.4 重要性與 1.5 結論 -->
+      <section id="module-1-significance" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-sky-50 text-sky-600 rounded-2xl">
+            <i data-lucide="sparkles" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 1.4–1.5｜研究重要性與結論建議</h2>
+            <p class="text-xs text-slate-500">學術知識缺口填補、臨床指引改革與 AI 協作實務建議</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-5 rounded-2xl bg-sky-50/70 border border-sky-200/80 space-y-2">
+            <h3 class="font-bold text-sky-950 text-sm">學術重要性 (Academic Significance)</h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              首創最大規模中英雙語復健 CPGs 雙工具（AGREE II + RIGHT）盤點，並透過嚴謹析因實驗證明<mark class="ai-hl ai-hl-method">「結構化知識手冊」而非單純換用更強模型，才是消除 LLM 醫療評鑑幻覺與過度樂觀偏誤的關鍵</mark>。
+            </p>
+          </div>
+          <div class="p-5 rounded-2xl bg-teal-50/70 border border-teal-200/80 space-y-2">
+            <h3 class="font-bold text-teal-950 text-sm">臨床與實務應用價值 (Practical Significance)</h3>
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+              確立<mark class="ai-hl ai-hl-takeaway">「AI 快速初篩 + 專家終審」的人機協同審稿流程可行性</mark>，並揭示獨立外部同行審查（OR 高達 20.39）與適用性設計（FITT 原則）是提升未來臨床指引品質的核心槓桿。
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">核心結論與 3 項具體行動建議</h3>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700">
+            <li class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <span class="font-extrabold text-blue-700">1.</span>
+              <span><strong>採用 Human-in-the-Loop 評鑑流程：</strong><mark class="ai-hl ai-hl-takeaway">由結構化手冊驅動的 AI Agent 負責 5 分鐘初篩與條目佐證定位，人類專家則專注於爭議方法學條目裁決</mark>。</span>
+            </li>
+            <li class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <span class="font-extrabold text-blue-700">2.</span>
+              <span><strong>醫療 AI 系統必須先建立 SOP 手冊與 RAG 知識庫：</strong>切忌直接讓 LLM 憑原始量表自由給分，必須提供邊界定義與正反例對照。</span>
+            </li>
+            <li class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+              <span class="font-extrabold text-blue-700">3.</span>
+              <span><strong>指引制定團隊應強制納入獨立外部同行審查與落地處方細節：</strong>強化「適用性」(35.9%) 與資金獨立性報告，使指引真正可執行於臨床一線。</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 模組二：電梯簡報 (Elevator Pitch) -->
+      <section id="module-2-pitch" class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-10 shadow-lg space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-amber-400/20 text-amber-300 rounded-2xl border border-amber-400/30">
+              <i data-lucide="mic" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">模組 2｜電梯簡報 (30–60 秒快速說明)</h2>
+              <p class="text-xs text-slate-300">模擬情境：在電梯中遇到主任或指導教授，快速精準講完這篇研究的核心價值</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span id="pitch-copy-status" class="text-xs text-emerald-300 font-semibold" aria-live="polite"></span>
+            <button id="btn-copy-pitch" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold border border-white/15 transition-colors">
+              <i data-lucide="copy" class="w-3.5 h-3.5" aria-hidden="true"></i>
+              <span>複製簡報腳本</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="elevator-pitch-script" class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm leading-relaxed">
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-amber-300 uppercase tracking-wider">1. Hook &bull; 臨床與研究痛點</div>
+            <p class="text-slate-200">「老師好！我們最近看了一篇發在 JMIR 的重磅研究，剛好解決一個很頭痛的問題：現在復健臨床指引品質很參差，但找專家人工用 AGREE II 評一篇要花快 15 分鐘；如果直接丟給 ChatGPT 或 LLM，它又常常只看表面關鍵字就給高分，不夠準。」</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-sky-300 uppercase tracking-wider">2. Action &bull; 他們做了什麼</div>
+            <p class="text-slate-200">「這篇華西醫院團隊先系統性盤點了 227 篇中英文復健指引，接著做了一件很聰明的事：他們把專家共識寫成一本『結構化評鑑手冊』，再用 RAG 技術接給 DeepSeek-R1 和 o1-mini，讓 AI 跟人類專家進行超過 5,000 個項目的盲測對決。」</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-emerald-300 uppercase tracking-wider">3. Punchline &bull; 震撼關鍵發現</div>
+            <p class="text-slate-200">「結果發現，過去指引竟然只有 14.1% 達高品質，而最決定高品質的因素是有沒有『獨立外部審查』（勝算比高達 20 倍）！更驚豔的是，有了結構化手冊後，DeepSeek-R1 跟專家的一致性 ICC 從 0.61 跳到 0.71，平均一篇只要 5.44 分鐘，快了將近 3 倍！」</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-1.5">
+            <div class="text-xs font-extrabold text-purple-300 uppercase tracking-wider">4. Impact &bull; 對我們的意義</div>
+            <p class="text-slate-200">「這給我們一個很明確的方向：未來做實證或系統性文獻評鑑時，不能只換更強的模型，而是要把領域專家的『評分規則手冊化＋RAG』，就能用 AI 當高通量初篩助手，人類專心把關關鍵爭議就好！」</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 模組三：文獻批判 (Critiques) -->
+      <section id="module-3-critiques" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-rose-50 text-rose-600 rounded-2xl">
+            <i data-lucide="scale" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 3｜文獻批判 (Critiques &amp; Critical Appraisal)</h2>
+            <p class="text-xs text-slate-500">使用原生可搜尋折疊區塊，客觀評析本研究之優勢、偏差風險與外推限制</p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <details class="border border-emerald-200 rounded-2xl overflow-hidden bg-emerald-50/20" open>
+            <summary class="p-5 flex items-center justify-between bg-emerald-50/60 hover:bg-emerald-100/60 transition-colors">
+              <div class="flex items-center space-x-3">
+                <div class="p-2 bg-emerald-600 text-white rounded-xl"><i data-lucide="thumbs-up" class="w-4 h-4" aria-hidden="true"></i></div>
+                <div>
+                  <span class="font-bold text-slate-900 text-sm block">研究優勢 (Strengths — 4 大方法學亮點)</span>
+                  <span class="text-xs text-emerald-700">雙語大樣本、析因實驗設計、Firth 校正迴歸、跨專科外部驗證</span>
+                </div>
+              </div>
+              <i data-lucide="chevron-down" class="chevron-icon w-5 h-5 text-emerald-700" aria-hidden="true"></i>
+            </summary>
+            <div class="p-5 border-t border-emerald-100 bg-white space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <p>&bull; <strong>雙工具與雙語大樣本盤點：</strong>納入了 227 篇中英文復健指引（163 英、64 中），同步使用 AGREE II 與 RIGHT 評估方法學與報告透明度。</p>
+              <p>&bull; <strong>嚴謹的 2x2 AI 析因實驗：</strong><mark class="ai-hl ai-hl-method">在 5,083 個條目上有效隔離「推理模型差異」與「結構化手冊知識配置」的獨立貢獻</mark>。</p>
+              <p>&bull; <strong>高適配統計校正：</strong>使用序數權重修正型 ICC 與 Firth 懲罰邏輯斯迴歸，妥善處理高品質指引樣本稀疏（僅 32 篇）之極端偏誤。</p>
+              <p>&bull; <strong>真實耗時與外部驗證：</strong>在 6 篇 ACL 重建指引上實測耗時與泛化能力，兼顧內部效度與實務應用價值。</p>
+            </div>
+          </details>
+
+          <details class="border border-rose-200 rounded-2xl overflow-hidden bg-rose-50/20" open>
+            <summary class="p-5 flex items-center justify-between bg-rose-50/60 hover:bg-rose-100/60 transition-colors">
+              <div class="flex items-center space-x-3">
+                <div class="p-2 bg-rose-600 text-white rounded-xl"><i data-lucide="alert-triangle" class="w-4 h-4" aria-hidden="true"></i></div>
+                <div>
+                  <span class="font-bold text-slate-900 text-sm block">研究限制與偏差風險 (Weaknesses, Risk of Bias &amp; Limitations)</span>
+                  <span class="text-xs text-rose-700">外部驗證樣本數少、寬信賴區間、長文本位置偏誤與一致性解讀界線</span>
+                </div>
+              </div>
+              <i data-lucide="chevron-down" class="chevron-icon w-5 h-5 text-rose-700" aria-hidden="true"></i>
+            </summary>
+            <div class="p-5 border-t border-rose-100 bg-white space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+              <p>&bull; <strong>外推性限制 (External Validity)：</strong>跨專科驗證僅選取 6 篇前十字韌帶重建 (ACL) 指引，對於內科、重症或跨系統慢性病指引的適用性仍待驗證。</p>
+              <p>&bull; <strong>事件稀疏導致估計不精確：</strong>高品質指引僅 32 篇 (14.1%)，使外部審查勝算比的 95% 信賴區間相當寬（OR 20.39, 95% CI 4.66–89.27）。</p>
+              <p>&bull; <strong>AI 長文本迷失與偶發幻覺：</strong>即便導入 RAG，LLM 面對數十頁指引 PDF 時仍可能因「Lost in the middle」而漏檢散落於附錄的方法學資訊。</p>
+              <p>&bull; <strong>對齊規則不等同臨床判斷力：</strong><mark class="ai-hl ai-hl-takeaway">AI 一致性提升反映的是「依循結構化手冊規則的能力」，尚無法完全替代資深專家對研究實質偏誤的批判性思維</mark>。</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 模組四：英文文獻閱讀與句型精讀 -->
+      <section id="module-4-english" class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-8">
+        <div class="flex items-center space-x-3">
+          <div class="p-3 bg-violet-50 text-violet-600 rounded-2xl">
+            <i data-lucide="languages" class="w-6 h-6" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">模組 4｜英文文獻閱讀與句型精讀 (Academic English Digest)</h2>
+            <p class="text-xs text-slate-500">透過高階學術英文短文、句型剖析與核心詞彙表，同步提升英語期刊閱讀與寫作能力</p>
+          </div>
+        </div>
+
+        <!-- 4.1 英文摘要短文 -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">1. 論文核心英文摘要精讀 (Academic Summary in English)</h3>
+          <article lang="en" class="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 leading-relaxed space-y-3">
+            <p>
+              <mark class="ai-hl ai-hl-english">Although clinical practice guidelines (CPGs) are essential for translating evidence into rehabilitation care, our systematic appraisal of 227 English and Chinese CPGs revealed that only 14.1% (32/227) met high-quality methodological thresholds</mark>, with applicability scoring lowest at <strong>35.9%</strong>. Notably, independent external peer review emerged as the strongest predictor of high methodological quality (Firth-adjusted OR = 16.24, <em>P</em> &lt; .001).
+            </p>
+            <p>
+              To address the labor-intensive bottleneck of manual evaluation, we conducted a factorial experiment across 5,083 item ratings comparing baseline reasoning LLMs against agents augmented with a consensus-derived structured appraisal workbook via Retrieval-Augmented Generation (RAG). Incorporating the workbook markedly elevated DeepSeek-R1's agreement with human consensus from an ICC of 0.613 to <strong>0.709</strong>, while reducing mean appraisal time to <strong>5.44 minutes</strong> per guideline—nearly threefold faster than human reviewers.
+            </p>
+            <p>
+              Collectively, these findings underscore that <mark class="ai-hl ai-hl-english">structured domain guidance, rather than model scaling alone, is pivotal for mitigating superficial keyword bias in medical LLMs</mark> and enabling reliable human-in-the-loop guideline screening.
+            </p>
+          </article>
+        </div>
+
+        <!-- 4.2 句型剖析 -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">2. 精選高頻學術句型與句構拆解 (Key Sentence Patterns)</h3>
+          <div class="grid grid-cols-1 gap-4">
+            <div class="p-5 rounded-2xl border border-violet-200 bg-violet-50/40 space-y-2">
+              <div class="text-xs font-extrabold text-violet-800">句型 A：讓步轉折引導核心發現 (Although..., ... revealed that...)</div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-900" lang="en">
+                "Although CPGs are essential for translating evidence into care, our appraisal revealed that only 14.1% met high-quality thresholds, with applicability scoring lowest."
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>句構解析：</strong>使用 <code>Although</code> 引出該領域的理想共識，再以主句點出實證落差，句尾用 <code>with + 名詞 + V-ing</code> 補充最弱項細節，非常適合放在 Abstract 或 Discussion 第一段破題。
+              </p>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-indigo-200 bg-indigo-50/40 space-y-2">
+              <div class="text-xs font-extrabold text-indigo-800">句型 B：比較突顯關鍵機制 (..., rather than ..., is pivotal for ...)</div>
+              <p class="text-xs sm:text-sm font-semibold text-slate-900" lang="en">
+                "Structured domain guidance, rather than model scaling alone, is pivotal for mitigating superficial keyword bias in medical LLMs."
+              </p>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                <strong>句構解析：</strong>以 <code>A, rather than B, is pivotal for V-ing...</code> 強調真正的因果關鍵，清楚區分本研究貢獻與一般做法的差異，是結尾下結論的黃金句型。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4.3 重要單字庫表格 -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-900">3. 核心學術與實證醫學單字庫 (Academic Vocabulary)</h3>
+          <div class="table-wrapper" tabindex="0" role="region" aria-labelledby="vocab-caption">
+            <table class="text-xs text-slate-700">
+              <caption id="vocab-caption" class="visually-hidden">本篇文獻精選學術英語單字、詞性、中文釋義與語境用法</caption>
+              <thead class="font-bold text-slate-800 border-b border-slate-200">
+                <tr>
+                  <th scope="col" class="p-3">英文詞彙 (Vocabulary)</th>
+                  <th scope="col" class="p-3">詞性</th>
+                  <th scope="col" class="p-3">中文釋義</th>
+                  <th scope="col" class="p-3">論文語境與用法解析</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr>
+                  <th scope="row" class="p-3 font-bold text-slate-900" lang="en">appraisal</th>
+                  <td class="p-3 font-mono-metric">n.</td>
+                  <td class="p-3">嚴格評鑑、品質評估</td>
+                  <td class="p-3">實證醫學常用搭配 <em>critical appraisal</em>（文獻評讀），程度比單純的 evaluation 更具方法學審查含義。</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="p-3 font-bold text-slate-900" lang="en">applicability</th>
+                  <td class="p-3 font-mono-metric">n.</td>
+                  <td class="p-3">適用性、臨床可執行度</td>
+                  <td class="p-3">AGREE II 第 5 領域，評估指引是否提供實務促進/阻礙因素與資源工具（本研究得分最低僅 35.9%）。</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="p-3 font-bold text-slate-900" lang="en">consensus-derived</th>
+                  <td class="p-3 font-mono-metric">adj.</td>
+                  <td class="p-3">由專家共識衍生的</td>
+                  <td class="p-3">複合形容詞，常用於形容經過 Delphi 法或專家會議校準產生的標準或手冊（<em>consensus-derived workbook</em>）。</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="p-3 font-bold text-slate-900" lang="en">mitigate</th>
+                  <td class="p-3 font-mono-metric">v.</td>
+                  <td class="p-3">減輕、緩解（偏誤或風險）</td>
+                  <td class="p-3">高頻學術動詞，常與 bias、risk、limitation 連用，如 <em>mitigate superficial keyword bias</em>。</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="p-3 font-bold text-slate-900" lang="en">generalizability</th>
+                  <td class="p-3 font-mono-metric">n.</td>
+                  <td class="p-3">外推性、跨情境泛化能力</td>
+                  <td class="p-3">同義於 <em>external validity</em>，指研究結論能否推論至其他專科或族群（如 ACL 驗證）。</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="p-3 font-bold text-slate-900" lang="en">pivotal</th>
+                  <td class="p-3 font-mono-metric">adj.</td>
+                  <td class="p-3">關鍵性的、決定性的</td>
+                  <td class="p-3">比 important 更具「樞紐、決定成敗」語氣的正式學術寫作用字（<em>be pivotal for...</em>）。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 個人自訂重點劃線與筆記本區塊 -->
+      <section id="user-highlights-section" class="bg-white border border-amber-200 rounded-3xl p-6 sm:p-10 shadow-sm space-y-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div class="flex items-center space-x-3">
+            <div class="p-3 bg-amber-50 text-amber-600 rounded-2xl">
+              <i data-lucide="highlighter" class="w-6 h-6" aria-hidden="true"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-slate-900">個人重點劃線筆記本 (My Saved Highlights)</h2>
+              <p class="text-xs text-slate-500">在上方內文反白文字即可選擇螢光筆顏色畫重點，瀏覽器會自動儲存您的個人劃線（點擊內文畫線處即可移除）</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="user-highlights-list" class="space-y-3"></div>
+      </section>
+
+      <!-- 頁尾 -->
+      <footer class="text-center text-xs text-slate-400 py-8 border-t border-slate-200 space-y-1">
+        <div>Paper Reading Hub &bull; 依據 <code>AGENTS.md</code> 與 <code>paper-reading</code> 四大模組生成</div>
+        <div class="text-[11px]">文獻來源：Mao X, Wang J, Zhu S, Li K, et al. <em>J Med Internet Res</em>. 2026;28:e96002. doi:10.2196/96002</div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- 原生 <dialog> 方法學詳細彈出視窗 -->
+  <dialog id="method-modal" closedby="any" aria-labelledby="modal-title" class="w-full bg-white text-slate-800">
+    <div class="p-6 sm:p-8 space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div class="flex items-center space-x-3">
+          <div class="p-2.5 rounded-xl bg-blue-50 text-blue-600">
+            <i id="modal-icon" data-lucide="database" class="w-5 h-5" aria-hidden="true"></i>
+          </div>
+          <div>
+            <h2 id="modal-title" class="text-lg font-bold text-slate-900">方法學詳細介紹</h2>
+            <p id="modal-subtitle" class="text-xs text-slate-500">深入參數與執行流程</p>
+          </div>
+        </div>
+        <form method="dialog">
+          <button type="submit" aria-label="關閉方法學視窗" class="p-2 text-slate-500 hover:text-slate-900 rounded-xl hover:bg-slate-100">
+            <i data-lucide="x" class="w-5 h-5" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+
+      <div id="modal-body" class="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed"></div>
+
+      <form method="dialog" class="border-t border-slate-100 pt-4 flex justify-end">
+        <button type="submit" autofocus class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold">
+          關閉視窗
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    window.PAPER_METHOD_DETAILS = {
+      search: {
+        title: '1. 文獻檢索策略與 PRISMA 流程 (227 篇指引)',
+        subtitle: '涵蓋全球與中文核心資料庫之全方位檢索（至 2026 年 6 月）',
+        icon: 'database',
+        content: '<div class="space-y-3"><div class="p-4 bg-slate-50 rounded-2xl border border-slate-200"><div class="font-bold text-slate-900 mb-1">資料庫文獻檢索統計：</div><ul class="list-disc list-inside space-y-1 text-slate-600"><li><strong>PubMed：</strong>71,800 篇 &bull; <strong>Embase：</strong>74,301 篇 &bull; <strong>Scopus：</strong>445 篇</li><li><strong>中國知網 (CNKI)：</strong>1,190 篇 &bull; <strong>萬方數據 (Wanfang)：</strong>1,115 篇</li><li><strong>權威指引庫 (NICE, SIGN, GIN)：</strong>1,660 篇</li><li><strong>初步檢索總量：</strong>150,957 篇 &rarr; 去重後篩選 63,883 篇摘要。</li></ul></div><div class="p-4 bg-blue-50/60 rounded-2xl border border-blue-100"><div class="font-bold text-blue-950 mb-1">最終納入指引：</div><p>評估 307 篇全文後排除非 CPG (n=46)、非復健 (n=19)、非中英文 (n=11) 等，<strong>最終納入 227 篇復健臨床實踐指引（163 篇英文、64 篇中文）</strong>。</p></div></div>'
+      },
+      appraisal: {
+        title: '2. AGREE II、RIGHT 清單與結構化評鑑手冊',
+        subtitle: '方法學嚴謹度與報告透明度之雙重評鑑標準',
+        icon: 'file-check',
+        content: '<div class="space-y-3"><div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs"><div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>AGREE II 工具：</strong>包含 6 大領域共 23 個條目（範圍與目的、利害關係人、嚴謹度、清晰度、適用性、獨立性）。</div><div class="p-3 bg-slate-50 rounded-xl border border-slate-200"><strong>RIGHT 清單：</strong>包含 7 大領域共 35 個條目，系統評估指引資訊報告完整性。</div></div><div class="p-4 bg-cyan-50/60 rounded-2xl border border-cyan-100"><div class="font-bold text-cyan-950 mb-1">專家共識評鑑手冊 (Workbook)：</div><p>針對初期人工評鑑不一致（ICC 低至 -0.09）的痛點，團隊透過專家共識將 7 分量表轉化為高、低、極低三級具體評分準則與範例，達成標準作業程序化。</p></div></div>'
+      },
+      ai: {
+        title: '3. RAG 增強型 AI Agent 評鑑架構',
+        subtitle: '基於 LangChain 的 DeepSeek-R1 與 OpenAI o1-mini 析因實驗',
+        icon: 'bot',
+        content: '<div class="space-y-3"><p>採用 <strong>LangChain 框架</strong>與 <code>text-embedding-ada-002</code> 向量模型，將 AGREE II 官方手冊與結構化評鑑手冊構建為 RAG 檢索知識庫。</p><div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2"><div class="font-bold text-slate-900">析因實驗設計：</div><ul class="list-disc list-inside space-y-1 text-slate-600"><li><strong>模型因子：</strong>DeepSeek-R1 對照 OpenAI o1-mini。</li><li><strong>知識因子：</strong>僅原始 AGREE II 標準 vs. 結合結構化評鑑手冊。</li><li><strong>測試規模：</strong>221 篇指引、共 5,083 個單項評分，每項皆要求輸出 1–7 分、置信度與原文佐證。</li></ul></div></div>'
+      },
+      stats: {
+        title: '4. 統計分析模型與外部 ACL 泛化驗證',
+        subtitle: '序數修正型 ICC、Firth 懲罰邏輯斯迴歸與跨專科測試',
+        icon: 'calculator',
+        content: '<div class="space-y-3"><div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1.5"><div class="font-bold text-slate-900">進階統計模型：</div><ul class="list-disc list-inside space-y-1 text-slate-600"><li><strong>修正型 ICC：</strong>考慮序數偏態分佈與評分心理距離施加領域懲罰權重。</li><li><strong>Firth 懲罰邏輯斯迴歸：</strong>克服高品質指引僅 32 篇之稀疏數據偏誤，產出概似比 95% CI。</li><li><strong>報告率統合分析：</strong>採用 HKSJ 隨機效果模型與 95% 預測區間。</li></ul></div><div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-100"><div class="font-bold text-emerald-950 mb-1">外部 ACL 重建驗證：</div><p>使用 6 篇前十字韌帶重建 CPGs 進行跨專科外推驗證，並精確紀錄 AI 與人類專家單篇評鑑耗時。</p></div></div>'
+      }
+    };
+  </script>
+  <script src="../assets/js/paper-page.js"></script>
+</body>
+</html>
