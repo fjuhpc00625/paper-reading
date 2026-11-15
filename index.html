@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Reading Hub | 實證期刊文獻互動導讀與學術英語精讀平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+  <a href="#main-content" class="skip-link visually-hidden">跳至主要內容</a>
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="./index.html" class="flex items-center gap-3 text-slate-900 no-underline">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <i data-lucide="book-open-check" class="w-5 h-5" aria-hidden="true"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-base tracking-tight block leading-tight">Paper Reading Hub</span>
+          <span class="text-[11px] text-slate-500 font-medium block">實證期刊文獻導讀與學術英語精讀</span>
+        </div>
+      </a>
+
+      <nav aria-label="主要導覽">
+        <ul class="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
+          <li><a href="#catalog" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">文獻資料庫</a></li>
+          <li><a href="#framework" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">四大導讀模組</a></li>
+          <li><a href="#workflow" class="px-3 py-2 rounded-lg text-slate-600 hover:text-blue-700 hover:bg-blue-50 transition-colors">擴充規範</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 space-y-12">
+    <!-- Hero Section -->
+    <section class="bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-sm relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5" aria-hidden="true"></i>
+            <span>由 AGENTS.md 規範與 paper-reading Skill 驅動</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            結構化期刊文獻導讀與學術英語精讀庫
+          </h1>
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
+            這是一個以 <strong><code class="text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">AGENTS.md</code></strong> 為核心開發規則的可擴充式靜態學術網站。每篇收錄的論文皆依循統一標準，將艱澀原文轉化為<strong>「PICO 結構拆解、30 秒電梯簡報、實證文獻批判、英文精讀練習」</strong>四大互動模組，讓研究者與團隊能快速掌握實證證據並練習學術英語。
+          </p>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="./papers/jmir-2026-cpg-ai.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-700 hover:bg-blue-800 text-white text-sm font-bold rounded-xl shadow-sm transition-colors">
+              <span>閱讀第一篇示範導讀</span>
+              <i data-lucide="arrow-right" class="w-4 h-4" aria-hidden="true"></i>
+            </a>
+            <a href="#workflow" class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-bold rounded-xl transition-colors">
+              <i data-lucide="file-code-2" class="w-4 h-4" aria-hidden="true"></i>
+              <span>查看 AGENTS.md 擴充方式</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+          <div class="p-4 rounded-2xl bg-slate-900 text-white col-span-2">
+            <div class="text-xs text-blue-200 font-semibold">已收錄導讀文獻</div>
+            <div class="text-3xl font-black mt-1 font-mono-metric"><span id="stat-total-papers">1</span> <span class="text-sm font-normal text-slate-300">篇</span></div>
+            <div class="text-[11px] text-slate-400 mt-1">資料來源：<code>data/papers.json</code></div>
+          </div>
+          <div class="p-4 rounded-2xl bg-blue-50 border border-blue-100">
+            <div class="text-xs font-bold text-blue-800">標準模組</div>
+            <div class="text-xl font-black text-blue-900 mt-1 font-mono-metric">4 大區塊</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-100">
+            <div class="text-xs font-bold text-emerald-800">零建置部署</div>
+            <div class="text-xl font-black text-emerald-900 mt-1">GitHub Pages</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 四大核心模組規格總覽 -->
+    <section id="framework" class="space-y-5">
+      <div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">統一的四大導讀模組規格</h2>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">本站每篇文獻頁皆依據 <code>AGENTS.md</code> 與 <code>.agents/skills/paper-reading/SKILL.md</code> 嚴格建置</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-2">
+          <div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center font-extrabold text-sm">1</div>
+          <h3 class="font-bold text-slate-900 text-sm">結構化拆解與 PICO</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">完整呈現主題、PICO 四要素、研究方法細節、含 95% CI 與 p 值之統計數據、重要性與結論。</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-2">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center font-extrabold text-sm">2</div>
+          <h3 class="font-bold text-slate-900 text-sm">30–60 秒電梯簡報</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">以「痛點 Hook &rarr; 研究 Action &rarr; 關鍵數據 Punchline &rarr; 臨床 Impact」模擬口頭快速報告腳本。</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-2">
+          <div class="w-9 h-9 rounded-xl bg-rose-50 text-rose-700 flex items-center justify-center font-extrabold text-sm">3</div>
+          <h3 class="font-bold text-slate-900 text-sm">實證文獻批判 Critiques</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">客觀剖析研究優勢、偏差風險（Risk of Bias）、外推性局限與未來研究改進建議。</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-2">
+          <div class="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-700 flex items-center justify-center font-extrabold text-sm">4</div>
+          <h3 class="font-bold text-slate-900 text-sm">英文文獻與句型精讀</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">提供高階學術英文改寫短文、代表性句型結構剖析及專業學術詞彙對照表，同步提升英語閱讀力。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 文獻資料庫列表 (Data-Driven from data/papers.json) -->
+    <section id="catalog" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">文獻導讀資料庫</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1" id="filter-status" aria-live="polite">正在載入文獻目錄...</p>
+        </div>
+
+        <search class="w-full md:w-80">
+          <label for="paper-search" class="visually-hidden">搜尋論文標題、作者、期刊或關鍵字</label>
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true"></i>
+            <input
+              id="paper-search"
+              type="search"
+              placeholder="搜尋題目、作者、期刊或關鍵字..."
+              class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:border-blue-500"
+            >
+          </div>
+        </search>
+      </div>
+
+      <div id="tag-filters" class="flex flex-wrap gap-2" role="group" aria-label="依領域標籤篩選文獻"></div>
+
+      <div id="papers-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+    </section>
+
+    <!-- AGENTS.md 擴充工作流說明 -->
+    <section id="workflow" class="bg-slate-900 text-white rounded-3xl p-8 sm:p-10 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-300">Rule-Driven Scalability</span>
+          <h2 class="text-xl sm:text-2xl font-extrabold mt-1">未來如何快速新增一篇文獻頁面？</h2>
+        </div>
+        <span class="px-3 py-1 rounded-full bg-emerald-400/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold self-start sm:self-center">
+          3 步驟標準化 SOP
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
+        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+          <div class="text-blue-300 font-bold">Step 1 &bull; 閱讀論文並讀取 AGENTS.md</div>
+          <p class="text-slate-300 leading-relaxed">提供期刊網址或 PDF 給 AI，AI 依據 <code>AGENTS.md</code> 與 <code>paper-reading</code> 萃取完整 PICO、統計數據、電梯簡報、批判與英文精讀。</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+          <div class="text-blue-300 font-bold">Step 2 &bull; 套用模板建立獨立頁面</div>
+          <p class="text-slate-300 leading-relaxed">複製 <code>templates/paper-template.html</code>，依規範命名為 <code>papers/&lt;journal&gt;-&lt;year&gt;-&lt;keyword&gt;.html</code>，維持統一版型與無障礙元件。</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+          <div class="text-blue-300 font-bold">Step 3 &bull; 更新單一資料索引</div>
+          <p class="text-slate-300 leading-relaxed">將新論文的 Metadata 附加至 <code>data/papers.json</code>，首頁目錄卡片與標籤篩選器即會自動上架，不需手動改寫首頁排版。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500 space-y-1">
+    <div>Paper Reading Hub &bull; 基於 <code>AGENTS.md</code> 與 <code>paper-reading</code> Skill 建置</div>
+    <div class="text-[11px] text-slate-400">可完全部署於 GitHub Pages 之純靜態網頁知識庫</div>
+  </footer>
+
+  <!-- 本地 file:// 預覽用之備援資料（同步自 data/papers.json） -->
+  <script id="papers-fallback" type="application/json">
+    [
+      {
+        "id": "jmir-2026-cpg-ai",
+        "title_zh": "透過結構化導引提升人類專家與 AI Agent 的臨床實踐指引評鑑品質",
+        "title_en": "Improving Clinical Practice Guideline Appraisal Quality Among Human Experts and AI Agents Through Structured Guidance",
+        "authors": "Mao X, Wang J, Zhu S, Li K, et al.",
+        "journal": "Journal of Medical Internet Research (JMIR)",
+        "year": 2026,
+        "impact_factor": "5.8–7.4",
+        "quartile": "Q1 (醫學資訊第 1 名)",
+        "doi": "10.2196/96002",
+        "tags": ["AI Agent", "實證醫學", "AGREE II / RIGHT", "復健醫療"],
+        "key_metrics": [
+          { "label": "納入指引", "value": "227 篇" },
+          { "label": "AI 一致性", "value": "ICC 0.709" },
+          { "label": "評鑑效率", "value": "5.44 分/篇" }
+        ],
+        "elevator_hook": "過去人工評鑑一篇臨床指引要花 15 分鐘、直接用 LLM 又常被表面關鍵字騙；本研究證實把專家共識寫進結構化手冊＋RAG，能讓 DeepSeek-R1 一致性跳升至 ICC 0.71，速度還快近 3 倍。",
+        "url": "papers/jmir-2026-cpg-ai.html",
+        "added_at": "2026-11-14"
+      }
+    ]
+  </script>
+  <script src="./assets/js/catalog.js"></script>
+</body>
+</html>
