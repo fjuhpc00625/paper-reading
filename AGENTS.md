@@ -66,7 +66,9 @@
 
 ## 1. 專案目的 (Project Purpose)
 
-本專案旨在將學術文獻精讀流程（定義於 [`.agents/skills/paper-reading/SKILL.md`](.agents/skills/paper-reading/SKILL.md)）轉化為**可持續累積、零建置步驟（Zero-Build）、可直接部署於 GitHub Pages** 的靜態學術網頁知識庫。
+本專案旨在將學術文獻精讀流程轉化為**可持續累積、零建置步驟（Zero-Build）、可直接部署於 GitHub Pages** 的靜態學術網頁知識庫。
+
+> **單一規則來源（Single Source of Instructions）**：根目錄的 `AGENTS.md` 是本專案唯一的 AI 開發與內容擴充規範。AI 新增或修改頁面前必須先閱讀本文件，不依賴其他外部 Skill 文件。
 
 當使用者提供一篇新的期刊文章網址（URL）或 PDF 檔案時，AI 應能依據本文件的**頁面結構、模板、重點劃線系統、資料索引格式與風格規範**，在數分鐘內自動產出一致且高品質的新文獻導讀頁面並上架至首頁。
 
@@ -91,9 +93,7 @@
 │   └── js/
 │       ├── catalog.js              # 首頁讀取 data/papers.json 並處理搜尋與標籤篩選
 │       └── paper-page.js           # 內頁共用互動邏輯（重點劃線、側欄導覽、Tabs、原生 <dialog>）
-└── .agents/
-    └── skills/
-        └── paper-reading/SKILL.md  # 定義四大內容模組與重點標註原則之文獻解析 Skill
+└── .nojekyll                       # 停用 GitHub Pages 的 Jekyll 處理
 ```
 
 ### 檔案命名規則
@@ -150,7 +150,7 @@
 - **禁止手動編寫卡片**：首頁卡片完全由資料驅動，AI 新增論文時**不可**直接把卡片 HTML 硬寫進 `index.html` 的 `<div id="papers-grid">` 中。
 
 ### 單篇論文導讀頁 (`papers/<slug>.html`)
-每一篇論文頁面都必須依序包含以下區塊（完整對應 `paper-reading` Skill）：
+每一篇論文頁面都必須依序包含以下區塊（完整對應本文件定義的四大核心模組）：
 
 1. **頂部重點劃線工具列 (`#highlight-toolbar`)** 與 **論文概覽 (`#overview`)**：
    - 中英文完整標題、含 `<mark class="ai-hl ...">` 重點標註之核心摘要、作者群、研究單位、期刊引用格式、DOI 外部連結、Impact Factor / 分區排名、以及 3 張關鍵統計指標卡片。
@@ -176,7 +176,7 @@
 
 當使用者要求「新增一篇論文到網站」時，AI 必須依序執行以下 4 個步驟：
 
-### Step 1：依據 `paper-reading` Skill 解析原文
+### Step 1：依據本文件的四大核心模組解析原文
 完整閱讀使用者提供的 PDF 或網址，萃取 PICO、研究方法、全部統計數據、電梯簡報、文獻批判、英文精讀材料與核心重點劃線句。
 
 ### Step 2：複製模板建立新頁面

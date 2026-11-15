@@ -2,7 +2,7 @@
 
 **Paper Reading Hub** 是一個專為臨床研究者、實證醫學團隊與學術讀者打造的互動式期刊文獻精讀知識庫。平台將繁複的國際期刊論文轉化為結構化的**四大核心導讀模組**（PICO 與方法學拆解、30 秒電梯簡報、實證文獻批判、學術英語精讀），並內建**雙模態 Paper 重點劃線與個人筆記匯出系統**。
 
-同時，專案結合 [`AGENTS.md`](AGENTS.md) 與 [`paper-reading`](.agents/skills/paper-reading/SKILL.md) 標準化工作流，讓新增文獻時能維持一致的視覺設計、統計呈現深度與無障礙互動體驗。
+同時，專案以根目錄的 [`AGENTS.md`](AGENTS.md) 作為唯一的 AI 開發規範，並搭配 `templates/paper-template.html` 建立標準化工作流，讓新增文獻時能維持一致的視覺設計、統計呈現深度與無障礙互動體驗。
 
 ---
 
