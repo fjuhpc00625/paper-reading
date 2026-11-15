@@ -22,7 +22,7 @@
 ├── data/
 │   └── papers.json                 # 單一資料來源 (Single Source of Truth)：登記所有文獻 metadata
 ├── papers/                         # 存放所有獨立文獻導讀頁面（每篇論文一個檔案）
-│   └── jmir-2026-cpg-ai.html       # 示範頁面：JMIR 2026 臨床指引與 AI 評鑑研究
+│   └── jmir-2026-cpg-ai.html       # JMIR 2026 臨床指引與 AI 評鑑研究
 ├── templates/
 │   └── paper-template.html         # 新增論文頁面時必用的標準 HTML 模板
 ├── assets/
